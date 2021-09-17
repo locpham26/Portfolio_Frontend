@@ -24,6 +24,9 @@ const LinkWrapper = styled.div`
 const LinkItem = styled(Link)`
   color: black;
   text-decoration: none;
+  & .active {
+    color: red !important;
+  }
 `;
 
 const LinkStyleItem = styled.div``;
@@ -43,10 +46,9 @@ const Header = () => {
       <NavigationListContainer>
         {navigationItems.map((item) => (
           <LinkWrapper key={item.key}>
-            {/* <LinkItem to={item.to}>{item.label}</LinkItem> */}
-            <Link to={item.to} activeStyle={{ color: "red" }}>
+            <LinkItem activeClassName="active" to={item.to}>
               {item.label}
-            </Link>
+            </LinkItem>
           </LinkWrapper>
         ))}
       </NavigationListContainer>
