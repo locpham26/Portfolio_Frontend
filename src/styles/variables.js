@@ -8,6 +8,8 @@ const variables = css`
     --primary-text: #1c1a1a;
     --secondary-text: #aaaaaa;
     --border-radius: 12px;
+    --spacing: 8px;
+    --nav-height: 60px;
   }
 `;
 

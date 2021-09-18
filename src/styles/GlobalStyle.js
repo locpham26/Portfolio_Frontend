@@ -22,5 +22,27 @@ const GlobalStyle = createGlobalStyle`
         -moz-osx-font-smoothing: grayscale;
     }
 
+    // Scroll bar
+
+    html {
+        scrollbar-width: thin;
+        scrollbar-color: var(--secondary-text);
+    }
+
+    body::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    body::-webkit-scrollbar-track {
+        background-color: transparent
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background-color: var(--primary-text);
+        border: 3px solid transparent;
+        border-radius: 12px;
+    }
     
-`
+`;
+
+export default GlobalStyle;
