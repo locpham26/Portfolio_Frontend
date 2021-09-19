@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "gatsby";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import ResumeButton from "./ResumeButton";
 
 const StyledHeader = styled.header`
   ${({ theme }) => theme.mixins.flexBetween};
@@ -13,7 +14,7 @@ const StyledHeader = styled.header`
   padding: 0px 10%;
 `;
 
-const StyledNavList = styled.nav`
+const StyledNavList = styled(motion.nav)`
   display: flex;
   height: 100%;
 `;
@@ -33,11 +34,12 @@ const StyledLinkWrapper = styled(motion.div)`
   .decoration-item {
     width: 0px;
   }
-  ~ .active {
+  &.active {
     a {
       color: var(--primary-teal);
     }
     .decoration-item {
+      width: 100%;
       animation-name: slide-in;
       animation-duration: 0.4s;
       @keyframes slide-in {
@@ -51,7 +53,7 @@ const StyledLinkWrapper = styled(motion.div)`
           width: 110%;
         }
         100% {
-          width: 1005;
+          width: 100%;
         }
       }
     }
@@ -65,12 +67,31 @@ const StyledLinkWrapper = styled(motion.div)`
 `;
 
 const StyledLinkDecoration = styled(motion.div)`
-  width: 100%;
   height: 2px;
   background-color: var(--primary-teal);
   position: absolute;
   bottom: 12px;
 `;
+
+const childrenVariants = {
+  show: {
+    y: 0,
+    opacity: 1,
+  },
+  hidden: {
+    y: -40,
+    opacity: 0,
+  },
+};
+
+const parentVariant = {
+  show: {
+    transition: { staggerChildren: 0.1 },
+  },
+  hidden: {
+    transition: { staggerChildren: 0.05 },
+  },
+};
 
 const navItems = [
   { key: "home", to: "#home", label: "Home" },
@@ -81,32 +102,22 @@ const navItems = [
   { key: "contacts", to: "#contacts", label: "Contacts" },
 ];
 
-const decorationMotion = {
-  rest: { opacity: 0 },
-  hover: {
-    opacity: 1,
-    transition: {
-      duration: 0.4,
-      type: "tween",
-      ease: "easeIn",
-    },
-  },
-};
-
 const Nav = ({ location }) => {
   return (
     <StyledHeader>
-      <StyledNavList>
+      <StyledNavList initial="hidden" animate="show" variants={parentVariant}>
         {navItems.map((item) => (
           <StyledLinkWrapper
             key={item.key}
-            className={location.hash == item.to ? "active" : ""}
+            className={location.hash === item.to ? "active" : ""}
+            variants={childrenVariants}
           >
             <Link to={item.to}>{item.label}</Link>
             <StyledLinkDecoration className="decoration-item" />
           </StyledLinkWrapper>
         ))}
       </StyledNavList>
+      <ResumeButton variants={childrenVariants} />
     </StyledHeader>
   );
 };

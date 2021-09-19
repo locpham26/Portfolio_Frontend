@@ -11,6 +11,17 @@ const mixins = {
     justify-content: space-between;
     align-items: center;
   `,
+  ctaButton: css`
+    color: white;
+    font-weight: bold;
+    background-color: var(--primary-teal);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `,
 };
 
 export default mixins;
