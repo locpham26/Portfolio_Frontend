@@ -94,7 +94,6 @@ const parentVariant = {
 };
 
 const navItems = [
-  { key: "home", to: "#home", label: "Home" },
   { key: "about", to: "#about", label: "About Me" },
   { key: "experience", to: "#experience", label: "Experience" },
   { key: "projects", to: "#projects", label: "Projects" },

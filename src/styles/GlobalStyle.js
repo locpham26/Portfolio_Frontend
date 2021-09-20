@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
         width: 100%;
         min-height: 100%;
         overflow-x: hidden;
+        font-family: 'Montserrat';
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
