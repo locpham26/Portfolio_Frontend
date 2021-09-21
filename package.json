@@ -15,7 +15,8 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "@fontsource/montserrat": "^4.5.1",
+    "@fontsource/roboto": "^4.5.0",
+    "@fontsource/ubuntu": "^4.5.0",
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "babel-plugin-styled-components": "^1.13.2",

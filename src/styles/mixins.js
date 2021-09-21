@@ -13,7 +13,6 @@ const mixins = {
   `,
   ctaButton: css`
     color: white;
-    font-weight: bold;
     background-color: var(--primary-teal);
     border-radius: var(--border-radius);
     cursor: pointer;
