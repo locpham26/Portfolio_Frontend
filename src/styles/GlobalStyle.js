@@ -21,6 +21,7 @@ const GlobalStyle = createGlobalStyle`
         min-height: 100%;
         overflow-x: hidden;
         line-height: 1.25;
+        background-color: #fffffe;
         font-family: var(--font-sans);
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;

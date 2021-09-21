@@ -5,6 +5,8 @@ import Nav from "./Nav";
 
 const StyledContent = styled.div`
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Layout = ({ location, children }) => {

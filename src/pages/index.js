@@ -6,9 +6,10 @@ import About from "../components/section/About";
 
 const StyledMain = styled.main`
   width: 100%;
-  padding: 0px 15%;
-  height: auto;
-  box-sizing: border-box;
+  min-height: 100vh;
+  max-width: 1600px;
+  margin: 0px auto;
+  padding: 0px 150px;
 `;
 
 const IndexPage = ({ location }) => {

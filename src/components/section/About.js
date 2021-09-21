@@ -14,11 +14,13 @@ const StyledIntroText = styled.div`
   }
 `;
 
+const introText = "I am a student at TCU. \n I do web and mobile design.";
+
 const About = () => {
   return (
-    <StyledAboutSection>
+    <StyledAboutSection id="about">
       <div className="section-title">About</div>
-      <StyledIntroText>I am a student at TCU</StyledIntroText>
+      <StyledIntroText>{introText}</StyledIntroText>
     </StyledAboutSection>
   );
 };
