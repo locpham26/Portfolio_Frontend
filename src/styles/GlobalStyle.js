@@ -20,6 +20,7 @@ const GlobalStyle = createGlobalStyle`
         width: 100%;
         min-height: 100%;
         overflow-x: hidden;
+        line-height: 1.25;
         font-family: var(--font-sans);
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -51,6 +52,12 @@ const GlobalStyle = createGlobalStyle`
         background-color: var(--secondary-text);
         border: 3px solid transparent;
         border-radius: 12px;
+    }
+
+    .section-title {
+        color: var(--primary-text);
+        font-size: 32px;
+        margin-bottom: 64px;
     }
     
 `;

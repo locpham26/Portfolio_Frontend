@@ -48,7 +48,6 @@ const createFontFace = (font) => {
     const ttf = format[0];
     const woff = format[1];
     const woff2 = format[2];
-    console.log(ttf);
     styles += `
       @font-face {
         font-family: '${font.family}';
@@ -61,7 +60,6 @@ const createFontFace = (font) => {
       }
     `;
   });
-  console.log(styles);
   return styles;
 };
 

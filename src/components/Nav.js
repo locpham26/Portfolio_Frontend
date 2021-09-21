@@ -11,7 +11,7 @@ const StyledHeader = styled.header`
   top: 0;
   z-index: 2;
   width: 100%;
-  padding: 0px 10%;
+  padding: 0px 15%;
 `;
 
 const StyledNavList = styled(motion.nav)`
@@ -29,7 +29,7 @@ const StyledLinkWrapper = styled(motion.div)`
   position: relative;
   a {
     text-decoration: none;
-    color: black;
+    color: var(--primary-text);
   }
   .decoration-item {
     width: 0px;
