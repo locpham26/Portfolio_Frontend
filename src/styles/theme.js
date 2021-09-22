@@ -2,15 +2,16 @@ import mixins from "./mixins";
 
 const theme = {
   bp: {
-    mobileS: `max-width: 330px`,
-    mobileM: `max-width: 400px`,
-    mobileL: `max-width: 480px`,
-    tabletS: `max-width: 600px`,
-    tabletL: `max-width: 768px`,
-    desktopXS: `max-width: 900px`,
-    desktopS: `max-width: 1080px`,
-    desktopM: `max-width: 1200px`,
-    desktopL: `max-width: 1400px`,
+    mobileS: `min-width: 320px`,
+    mobileM: `min-width: 375px`,
+    mobileL: `min-width: 425px`,
+    tabletS: `min-width: 600px`,
+    tabletL: `min-width: 768px`,
+    laptopS: `min-width: 1024px`,
+    laptopM: `min-width: 1366px`,
+    laptopL: `min-width: 1440px`,
+    desktopM: `min-width: 1680px`,
+    desktopL: `min-width: 1920px`,
   },
   mixins,
 };

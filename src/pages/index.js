@@ -10,6 +10,9 @@ const StyledMain = styled.main`
   max-width: 1600px;
   margin: 0px auto;
   padding: 0px 150px;
+  @media screen and (${({ theme }) => theme.bp.desktopL}) {
+    padding: 0px;
+  }
 `;
 
 const IndexPage = ({ location }) => {

@@ -55,6 +55,10 @@ const GlobalStyle = createGlobalStyle`
         border-radius: 12px;
     }
 
+    p {
+        margin: unset;
+    }
+
     .section-title {
         color: var(--primary-text);
         font-size: 32px;

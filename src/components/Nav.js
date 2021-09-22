@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import ResumeButton from "./ResumeButton";
@@ -11,7 +12,7 @@ const StyledHeader = styled.header`
   top: 0;
   z-index: 2;
   width: 100%;
-  padding: 0px 15%;
+  padding: 0px 64px;
 `;
 
 const StyledNavList = styled(motion.nav)`
@@ -70,7 +71,7 @@ const StyledLinkDecoration = styled(motion.div)`
   height: 2px;
   background-color: var(--primary-teal);
   position: absolute;
-  bottom: 12px;
+  bottom: 24px;
 `;
 
 const childrenVariants = {
@@ -104,6 +105,7 @@ const navItems = [
 const Nav = ({ location }) => {
   return (
     <StyledHeader>
+      <StaticImage src="../images/icon.png" width={64} height={64} alt="logo" />
       <StyledNavList initial="hidden" animate="show" variants={parentVariant}>
         {navItems.map((item) => (
           <StyledLinkWrapper

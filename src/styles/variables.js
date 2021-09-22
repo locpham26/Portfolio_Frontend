@@ -9,7 +9,7 @@ const variables = css`
     --secondary-text: #aaaaaa;
     --border-radius: 8px;
     --spacing: 8px;
-    --nav-height: 60px;
+    --nav-height: 96px;
     --font-sans: "Noto Sans Display", "Inter", "San Francisco", "SF Pro Text",
       -apple-system, system-ui, sans-serif;
   }
