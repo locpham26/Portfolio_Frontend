@@ -50,7 +50,7 @@ const StyledHeroImageContainer = styled.div`
     max-width: 800px;
   }
   @media screen and (${({ theme }) => theme.bp.laptopM}) {
-    max-width: 640px;
+    max-width: 480px;
   }
 `;
 
@@ -78,6 +78,10 @@ const StyledGreeting = styled.div`
   .title {
     font-size: 56px;
     color: var(--primary-text);
+  }
+  .button-container {
+    display: flex;
+    flex-direction: row;
   }
 `;
 
