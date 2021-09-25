@@ -6,6 +6,8 @@ const StyledAboutSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
+  margin-bottom: 192px;
   .intro-text {
     color: var(--secondary-text);
     font-size: 16px;

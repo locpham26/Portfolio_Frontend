@@ -4,7 +4,6 @@ const WebIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
-    xmlnsSvgjs="http://svgjs.com/svgjs"
     version="1.1"
     width="20"
     height="20"
@@ -12,7 +11,6 @@ const WebIcon = () => (
     y="0"
     viewBox="0 0 94.504 94.504"
     xmlSpace="preserve"
-    class=""
   >
     <g>
       <g xmlns="http://www.w3.org/2000/svg">

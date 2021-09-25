@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import Hero from "../components/section/Hero";
 import styled from "styled-components";
 import About from "../components/section/About";
+import Experience from "../components/section/Experience";
 
 const StyledMain = styled.main`
   width: 100%;
@@ -22,6 +23,7 @@ const IndexPage = ({ location }) => {
       <StyledMain>
         <Hero />
         <About />
+        <Experience />
       </StyledMain>
     </Layout>
   );
