@@ -1,30 +1,15 @@
 import React from "react";
 import Layout from "../components/Layout";
 import Hero from "../components/section/Hero";
-import styled from "styled-components";
 import About from "../components/section/About";
 import Experience from "../components/section/Experience";
 
-const StyledMain = styled.main`
-  width: 100%;
-  min-height: 100vh;
-  max-width: 1600px;
-  margin: 0px auto;
-  padding: 0px 150px;
-  @media screen and (${({ theme }) => theme.bp.desktopL}) {
-    padding: 0px;
-  }
-`;
-
 const IndexPage = ({ location }) => {
-  console.log(location);
   return (
     <Layout location={location}>
-      <StyledMain>
-        <Hero />
-        <About />
-        <Experience />
-      </StyledMain>
+      <Hero />
+      <About />
+      <Experience />
     </Layout>
   );
 };

@@ -68,5 +68,4 @@ const fonts = css`
   ${notoSansDisplayFont}
 `;
 
-console.log(fonts);
 export default fonts;

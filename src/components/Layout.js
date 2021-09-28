@@ -9,6 +9,13 @@ const StyledContent = styled.div`
   flex-direction: column;
 `;
 
+const StyledMain = styled.main`
+  width: 100%;
+  min-height: 100vh;
+  margin: 0px auto;
+  padding: 0px;
+`;
+
 const Layout = ({ location, children }) => {
   return (
     <div id="root">
@@ -16,7 +23,7 @@ const Layout = ({ location, children }) => {
         <GlobalStyle />
         <StyledContent>
           <Nav location={location} />
-          <div id="content">{children}</div>
+          <StyledMain>{children}</StyledMain>
         </StyledContent>
       </ThemeProvider>
     </div>

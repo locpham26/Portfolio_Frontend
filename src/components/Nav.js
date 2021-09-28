@@ -3,7 +3,6 @@ import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import ResumeButton from "./ResumeButton";
 
 const StyledHeader = styled.header`
   ${({ theme }) => theme.mixins.flexBetween};
@@ -13,6 +12,16 @@ const StyledHeader = styled.header`
   z-index: 2;
   width: 100%;
   padding: 0px 64px;
+  .resume-button {
+    color: white;
+    background-color: var(--primary-purple);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const StyledNavList = styled(motion.nav)`
@@ -31,13 +40,14 @@ const StyledLinkWrapper = styled(motion.div)`
   a {
     text-decoration: none;
     color: var(--primary-text);
+    font-weight: 500;
   }
   .decoration-item {
     width: 0px;
   }
   &.active {
     a {
-      color: var(--primary-teal);
+      color: var(--primary-purple);
     }
     .decoration-item {
       width: 100%;
@@ -61,7 +71,7 @@ const StyledLinkWrapper = styled(motion.div)`
   }
   &:hover {
     a {
-      color: var(--primary-teal);
+      color: var(--primary-purple);
       transition: color 0.4s;
     }
   }
@@ -69,7 +79,7 @@ const StyledLinkWrapper = styled(motion.div)`
 
 const StyledLinkDecoration = styled(motion.div)`
   height: 2px;
-  background-color: var(--primary-teal);
+  background-color: var(--primary-purple);
   position: absolute;
   bottom: 24px;
 `;
@@ -118,7 +128,7 @@ const Nav = ({ location }) => {
           </StyledLinkWrapper>
         ))}
       </StyledNavList>
-      <ResumeButton variants={childrenVariants} />
+      <div className="resume-button">Resume</div>
     </StyledHeader>
   );
 };
