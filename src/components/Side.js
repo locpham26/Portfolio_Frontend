@@ -27,17 +27,21 @@ const StyledSocialList = styled.ul`
     background-color: #ffba00;
   }
   li {
-    margin-bottom: 16px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    padding: 8px;
     &:hover,
     &:focus {
-      transform: translateY(-3px);
+      background-color: var(--primary-purple);
+      a {
+        svg {
+          fill: white;
+        }
+      }
     }
 
     a {
-      &:hover,
-      &:focus {
-        transform: translateY(-3px);
-      }
+      display: flex;
       svg {
         width: 20px;
         height: 20px;
@@ -47,14 +51,22 @@ const StyledSocialList = styled.ul`
 `;
 
 const socialItems = [
-  { key: "facebook", to: "", icon: <FacebookIcon /> },
+  {
+    key: "facebook",
+    to: "https://www.facebook.com/phamthe.loc.12/",
+    icon: <FacebookIcon />,
+  },
   {
     key: "linkedin",
     to: "https://www.linkedin.com/in/locpham26/",
     icon: <LinkedInIcon />,
   },
-  { key: "insta", to: "", icon: <InstaIcon /> },
-  { key: "github", to: "", icon: <GithubIcon /> },
+  {
+    key: "insta",
+    to: "https://www.instagram.com/phamtheloc/",
+    icon: <InstaIcon />,
+  },
+  { key: "github", to: "https://github.com/locpham26", icon: <GithubIcon /> },
 ];
 
 const Side = () => {

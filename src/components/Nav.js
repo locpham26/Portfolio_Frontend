@@ -16,7 +16,7 @@ const StyledHeader = styled(motion.header)`
   .resume-button {
     color: white;
     background-color: var(--primary-purple);
-    border-radius: var(--border-radius);
+    border-radius: 40px;
     cursor: pointer;
     padding: 12px 16px;
     display: flex;

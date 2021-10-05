@@ -76,6 +76,7 @@ const StyledHeroInfo = styled.div`
       font-size: 16px;
       color: var(--primary-text);
       display: flex;
+      margin-bottom: 24px;
       svg {
         margin-right: 16px;
       }
@@ -83,7 +84,7 @@ const StyledHeroInfo = styled.div`
     .resume-button {
       border: 2px solid var(--primary-purple);
       color: var(--primary-purple);
-      border-radius: var(--border-radius);
+      border-radius: 40px;
       font-weight: 500;
       font-size: 20px;
       width: fit-content;
