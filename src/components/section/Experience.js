@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { StaticImage, GatsbyImage } from "gatsby-plugin-image";
-import HeroImage from "../../images/hero.jpeg";
+import { DeveloperIcon, EngineerIcon } from "../icons";
+import { graphql, useStaticQuery } from "gatsby";
 
 const StyledExperienceSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 80%;
+  margin: 0 auto;
 `;
 
 const StyledJobList = styled.ul`
@@ -17,66 +19,43 @@ const StyledJobList = styled.ul`
 `;
 
 const StyledJobItem = styled.li`
-  margin-bottom: 96px;
-  display: grid;
-  grid-template-columns: ${({ isOdd }) => (isOdd ? "480px 1fr" : "1fr 480px")};
-  direction: ${({ isOdd }) => (isOdd ? "ltr" : "rtl")};
-  gap: 96px;
-  justify-content: space-between;
+  margin-bottom: 48px;
+  .item-inner {
+    display: flex;
+    flex-direction: ${({ isOdd }) => (isOdd ? "row" : "row-reverse")};
+    align-items: center;
+    gap: 96px;
+  }
 `;
 
 const StyledJobImageContainer = styled.div`
-  position: relative;
-  border-radius: var(--border-radius);
-  .job-image {
-    width: 100%;
-    z-index: 1;
-    border-radius: var(--border-radius);
-  }
-  .decoration {
-    position: absolute;
-
-    border-radius: var(--border-radius);
-    background-color: var(--primary-teal);
-    width: 20%;
-    height: 20%;
-  }
-  .top {
-    left: 84%;
-    bottom: 84%;
-    background-color: var(--primary-teal);
-  }
-  .bottom {
-    right: 84%;
-    top: 84%;
-    background-color: var(--primary-purple);
+  flex: 0 0 320px;
+  max-width: 100%;
+  max-height: 400px;
+  svg {
+    max-width: 100%;
+    height: 100%;
   }
 `;
 
 const StyledJobDescriptionWrapper = styled.div`
-  /* background-color: #fafdfd; */
-  border-radius: var(--border-radius);
+  flex: 1 1 auto;
   padding: 40px;
   height: 100%;
+  max-width: 100%;
   .organization-name {
-    color: var(--primary-teal);
+    color: var(--primary-purple);
   }
   .position {
     color: var(--primary-text);
     font-weight: 600;
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 8px;
   }
   .period {
     color: var(--secondary-text);
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 24px;
-  }
-  .description {
-    color: var(--primary-text);
-    font-size: 20px;
-    .bullet {
-    }
   }
 `;
 
@@ -89,7 +68,7 @@ const StyledJobDescription = styled.ul`
     display: grid;
     grid-template-columns: 24px 1fr;
     gap: 8px;
-    font-size: 18px;
+    font-size: 16px;
     color: var(--primary-text);
     box-sizing: border-box;
     margin-bottom: 16px;
@@ -98,91 +77,67 @@ const StyledJobDescription = styled.ul`
       height: 16px;
       display: inline-block;
       border-radius: 4px;
-      background-color: var(--primary-teal);
+      background-color: #ffba00;
       transform: rotate(45deg);
       position: relative;
       top: 4px;
       left: 4px;
+      &:hover {
+        transform: rotate(0deg);
+      }
     }
   }
 `;
 
-const jobItems = [
+export const query = graphql`
   {
-    key: 1,
-    name: "MISA JSC",
-    position: "Software Engineer Intern",
-    period: "December 2020 - May 2021",
-    logo: HeroImage,
-    description: [
-      {
-        key: 1,
-        text: "I’m baby crucifix umami drinking vinegar wayfarers knausgaardorganic jianbing copper mug. I’m baby crucifix umami drinking vinegar wayfarers knausgaard organic jianbing copper mug.",
-      },
-      {
-        key: 2,
-        text: "I’m baby crucifix umami drinking vinegar wayfarers knausgaardorganic jianbing copper mug. I’m baby crucifix umami drinking vinegar wayfarers knausgaard organic jianbing copper mug.",
-      },
-      {
-        key: 3,
-        text: "I’m baby crucifix umami drinking vinegar wayfarers knausgaardorganic jianbing copper mug. I’m baby crucifix umami drinking vinegar wayfarers knausgaard organic jianbing copper mug.",
-      },
-    ],
-  },
-  {
-    key: 2,
-    name: "Eastgate Software JSC",
-    position: "Web Developer Intern",
-    period: "March 2021 - July 2021",
-    logo: HeroImage,
-    description: [
-      {
-        key: 1,
-        text: "I’m baby crucifix umami drinking vinegar wayfarers knausgaardorganic jianbing copper mug. I’m baby crucifix umami drinking vinegar wayfarers knausgaard organic jianbing copper mug.",
-      },
-      {
-        key: 2,
-        text: "I’m baby crucifix umami drinking vinegar wayfarers knausgaardorganic jianbing copper mug. I’m baby crucifix umami drinking vinegar wayfarers knausgaard organic jianbing copper mug.",
-      },
-      {
-        key: 3,
-        text: "I’m baby crucifix umami drinking vinegar wayfarers knausgaardorganic jianbing copper mug. I’m baby crucifix umami drinking vinegar wayfarers knausgaard organic jianbing copper mug.",
-      },
-    ],
-  },
-];
+    allStrapiJobs {
+      nodes {
+        company
+        duration
+        position
+        description {
+          detail
+          id
+        }
+        strapiId
+      }
+    }
+  }
+`;
+
+const imageList = [<DeveloperIcon />, <EngineerIcon />];
 
 const Experience = () => {
+  const {
+    allStrapiJobs: { nodes: jobs },
+  } = useStaticQuery(query);
   return (
     <StyledExperienceSection id="experience">
       <div className="section-title">Experience</div>
       <StyledJobList>
-        {jobItems.map((item, index) => (
-          <StyledJobItem key={item.key} isOdd={(index + 1) % 2 !== 0}>
-            <StyledJobImageContainer>
-              <GatsbyImage
-                className="job-image"
-                alt="job-image"
-                image={item.logo}
-              />
-              <div className="top decoration"></div>
-              <div className="bottom decoration"></div>
-            </StyledJobImageContainer>
-            <StyledJobDescriptionWrapper>
-              <p className="position">
-                {item.position}
-                <span className="organization-name">@{item.name}</span>
-              </p>
-              <p className="period">{item.period}</p>
-              <StyledJobDescription>
-                {item.description.map((desc) => (
-                  <li key={desc.key}>
-                    <span className="bullet" />
-                    {desc.text}
-                  </li>
-                ))}
-              </StyledJobDescription>
-            </StyledJobDescriptionWrapper>
+        {jobs.map((item, index) => (
+          <StyledJobItem key={item.strapiId} isOdd={(index + 1) % 2 !== 0}>
+            <div className="item-inner">
+              <StyledJobImageContainer>
+                {imageList[index]}
+              </StyledJobImageContainer>
+              <StyledJobDescriptionWrapper>
+                <p className="position">
+                  {item.position}
+                  <span className="organization-name"> @{item.company}</span>
+                </p>
+                <p className="period">{item.duration}</p>
+                <StyledJobDescription>
+                  {item.description.map((desc) => (
+                    <li key={desc.id}>
+                      <span className="bullet" />
+                      {desc.detail}
+                    </li>
+                  ))}
+                </StyledJobDescription>
+              </StyledJobDescriptionWrapper>
+            </div>
           </StyledJobItem>
         ))}
       </StyledJobList>

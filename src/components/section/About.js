@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { DesignIcon, MobileIcon, WebIcon } from "../icons";
 
 const StyledAboutSection = styled.section`
+  width: 80%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,61 +20,49 @@ const StyledAboutSection = styled.section`
   }
 `;
 
-const StyledSkillBoxContainer = styled.div`
-  position: relative;
-  border-radius: var(--border-radius);
+const StyledSkillList = styled.div`
   width: 100%;
   box-sizing: border-box;
-  margin-top: 64px;
-  .skill-box-wrapper {
+  margin-top: 32px;
+  .skill-box-inner {
     width: 100%;
-    position: relative;
-    border: 1px solid var(--primary-text);
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    padding: 32px 0px;
-    z-index: 1;
-    border-radius: var(--border-radius);
-    background-color: white;
-  }
-  .decoration {
-    width: 28%;
-    height: 64px;
-    border-radius: var(--border-radius);
-    background-color: var(--primary-purple);
-    position: absolute;
-  }
-  .top {
-    left: 73%;
-    bottom: 75%;
-  }
-  .bottom {
-    right: 73%;
-    top: 75%;
+    /* align-items: center; */
   }
 `;
 
 const StyledSkillCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .icon-wrapper {
-    width: 48px;
-    height: 48px;
-    background-color: var(--primary-purple);
-    border-radius: 12px;
-    ${({ theme }) => theme.mixins.flexCenter};
-    box-sizing: border-box;
-    margin-bottom: 24px;
-  }
-  .title {
-    font-weight: 600;
-    box-sizing: border-box;
-    margin-bottom: 16px;
-  }
-  .description {
-    color: var(--secondary-text);
+  width: 28%;
+  /* margin: 0px auto; */
+  height: 100%;
+  .skill-card-inner {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    background-color: #fff4ff;
+    padding: 24px;
+    border-radius: var(--border-radius);
+    .icon-wrapper {
+      width: 48px;
+      height: 48px;
+      background-color: white;
+      border-radius: 12px;
+      ${({ theme }) => theme.mixins.flexCenter};
+      box-sizing: border-box;
+      margin-bottom: 16px;
+    }
+    .title {
+      font-weight: 500;
+      font-size: 24px;
+      box-sizing: border-box;
+      color: var(--primary-text);
+      margin-bottom: 16px;
+    }
+    .description {
+      color: var(--primary-text);
+      font-size: 16px;
+    }
   }
 `;
 
@@ -87,19 +77,22 @@ const skillItems = [
   {
     key: "web",
     title: "Web Development",
-    description: "fsdj lahf kljlf jlkf klsjdf kl",
+    description:
+      "Deep v succulents biodiesel godard man bun, master cleanse slow-carb affogato yr cronut seitan. Man braid glossier banh mi, deep v salvia lo-fi jianbing forage air plant fam.",
     icon: <WebIcon />,
   },
   {
     key: "mobile",
     title: "Mobile Development",
-    description: "fsd fsdgg gdfg d gdfg",
+    description:
+      "Deep v succulents biodiesel godard man bun, master cleanse slow-carb affogato yr cronut seitan. Man braid glossier banh mi, deep v salvia lo-fi jianbing forage air plant fam.",
     icon: <MobileIcon />,
   },
   {
     key: "design",
     title: "UI UX Design",
-    description: "fsdf sdf  sfd ff sfd ",
+    description:
+      "Deep v succulents biodiesel godard man bun, master cleanse slow-carb affogato yr cronut seitan. Man braid glossier banh mi, deep v salvia lo-fi jianbing forage air plant fam.",
     icon: <DesignIcon />,
   },
 ];
@@ -107,26 +100,26 @@ const skillItems = [
 const About = () => {
   return (
     <StyledAboutSection id="about">
-      <div className="section-title">About</div>
+      <div className="section-title">About me</div>
       <p className="intro-text">
         {educationText}
         <span className="school-name">{universityName}</span>.
       </p>
       <p className="intro-text">{jobText}</p>
       <p className="intro-text">{additionalText}</p>
-      <StyledSkillBoxContainer>
-        <div className="skill-box-wrapper">
+      <StyledSkillList>
+        <div className="skill-box-inner">
           {skillItems.map((item) => (
             <StyledSkillCard key={item.key}>
-              <div className="icon-wrapper">{item.icon}</div>
-              <div className="title">{item.title}</div>
-              <div className="description">{item.description}</div>
+              <div className="skill-card-inner">
+                <div className="icon-wrapper">{item.icon}</div>
+                <div className="title">{item.title}</div>
+                <div className="description">{item.description}</div>
+              </div>
             </StyledSkillCard>
           ))}
         </div>
-        <div className="top decoration"></div>
-        <div className="bottom decoration"></div>
-      </StyledSkillBoxContainer>
+      </StyledSkillList>
     </StyledAboutSection>
   );
 };

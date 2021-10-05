@@ -34,5 +34,20 @@ module.exports = {
       },
       __key: "pages",
     },
+    {
+      resolve: `gatsby-source-strapi`,
+      options: {
+        apiURL: `https://murmuring-harbor-63131.herokuapp.com`,
+        collectionTypes: [`jobs`, `projects`],
+        singleTypes: [`gallery`, `intro`],
+      },
+    },
+    {
+      resolve: "gatsby-plugin-anchor-links",
+      options: {
+        offset: -100,
+        duration: 400,
+      },
+    },
   ],
 };

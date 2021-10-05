@@ -2,14 +2,15 @@ import React from "react";
 import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { motion, useViewportScroll } from "framer-motion";
+import { AnchorLink } from "gatsby-plugin-anchor-links";
 
-const StyledHeader = styled.header`
+const StyledHeader = styled(motion.header)`
   ${({ theme }) => theme.mixins.flexBetween};
   height: var(--nav-height);
   position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 5;
   width: 100%;
   padding: 0px 64px;
   .resume-button {
@@ -105,16 +106,44 @@ const parentVariant = {
 };
 
 const navItems = [
-  { key: "about", to: "#about", label: "About Me" },
-  { key: "experience", to: "#experience", label: "Experience" },
-  { key: "projects", to: "#projects", label: "Projects" },
-  { key: "other", to: "#other", label: "Other Works" },
-  { key: "contacts", to: "#contacts", label: "Contacts" },
+  { key: "about", to: "/#about", label: "About Me" },
+  { key: "experience", to: "/#experience", label: "Experience" },
+  { key: "projects", to: "/#projects", label: "Projects" },
+  { key: "other", to: "/#other", label: "Other Works" },
+  { key: "contacts", to: "/#contacts", label: "Contacts" },
 ];
 
 const Nav = ({ location }) => {
+  const [hidden, setHidden] = React.useState(false);
+  const [overHero, setOverHero] = React.useState(false);
+  const { scrollY } = useViewportScroll();
+  const scrollListener = () => {
+    if (scrollY.current < scrollY.prev) setHidden(false);
+    else if (scrollY.current > 350) {
+      setOverHero(true);
+      if (scrollY.current > scrollY.prev) setHidden(true);
+    }
+    if (scrollY.current <= 350) setOverHero(false);
+  };
+  React.useEffect(() => {
+    scrollY.onChange(() => scrollListener());
+  });
+  const variants = {
+    visible: { opacity: 1, y: 0 },
+    hidden: { opacity: 0, y: -25 },
+  };
   return (
-    <StyledHeader>
+    <StyledHeader
+      variants={variants}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ ease: [0.1, 0.25, 0.3, 1], duration: 0.5 }}
+      style={{
+        backgroundColor: overHero ? "#FFFFFF" : "transparent",
+        boxShadow:
+          overHero &&
+          "0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)",
+      }}
+    >
       <StaticImage src="../images/icon.png" width={64} height={64} alt="logo" />
       <StyledNavList initial="hidden" animate="show" variants={parentVariant}>
         {navItems.map((item) => (
@@ -123,7 +152,7 @@ const Nav = ({ location }) => {
             className={location.hash === item.to ? "active" : ""}
             variants={childrenVariants}
           >
-            <Link to={item.to}>{item.label}</Link>
+            <AnchorLink to={item.to}>{item.label}</AnchorLink>
             <StyledLinkDecoration className="decoration-item" />
           </StyledLinkWrapper>
         ))}

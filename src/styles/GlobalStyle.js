@@ -25,6 +25,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: var(--font-sans);
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        /* scroll-behavior: smooth; */
     }
 
     #root {
@@ -39,6 +40,7 @@ const GlobalStyle = createGlobalStyle`
     html {
         scrollbar-width: thin;
         scrollbar-color: var(--secondary-text);
+        /* scroll-behavior: smooth; */
     }
 
     body::-webkit-scrollbar {
@@ -62,7 +64,8 @@ const GlobalStyle = createGlobalStyle`
     .section-title {
         color: var(--primary-text);
         font-size: 32px;
-        margin-bottom: 64px;
+        margin-bottom: 32px;
+        font-weight: 500;
     }
     
 `;

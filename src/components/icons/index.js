@@ -1,5 +1,11 @@
 export { default as WebIcon } from "./web";
+export { default as DeveloperIcon } from "./developer";
+export { default as EngineerIcon } from "./engineer";
 export { default as MobileIcon } from "./mobile";
 export { default as DesignIcon } from "./design";
 export { default as MailIcon } from "./mail";
 export { default as PhoneIcon } from "./phone";
+export { default as GithubIcon } from "./github";
+export { default as FacebookIcon } from "./facebook";
+export { default as LinkedInIcon } from "./linkedin";
+export { default as InstaIcon } from "./insta";

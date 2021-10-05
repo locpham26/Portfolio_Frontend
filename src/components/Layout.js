@@ -2,6 +2,7 @@ import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "../styles";
 import Nav from "./Nav";
+import Side from "./Side";
 
 const StyledContent = styled.div`
   min-height: 100vh;
@@ -23,6 +24,7 @@ const Layout = ({ location, children }) => {
         <GlobalStyle />
         <StyledContent>
           <Nav location={location} />
+          <Side />
           <StyledMain>{children}</StyledMain>
         </StyledContent>
       </ThemeProvider>
