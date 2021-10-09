@@ -1,7 +1,10 @@
 module.exports = {
   siteMetadata: {
     siteUrl: "https://www.yourdomain.tld",
-    title: "My Portfolio Site",
+    title: "Loc Pham",
+    description:
+      "Loc Pham is a software engineer who loves creating web and mobile applications.",
+    twitterUsername: "@LocPham26",
   },
   plugins: [
     "gatsby-plugin-styled-components",
@@ -12,7 +15,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        icon: "src/images/icon.png",
+        icon: "src/images/logo.svg",
       },
     },
     "gatsby-plugin-mdx",

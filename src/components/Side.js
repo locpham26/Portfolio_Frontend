@@ -29,22 +29,17 @@ const StyledSocialList = styled.ul`
   li {
     margin-bottom: 8px;
     border-radius: 8px;
-    padding: 8px;
-    &:hover,
-    &:focus {
-      background-color: var(--primary-purple);
-      a {
-        svg {
-          fill: white;
-        }
-      }
-    }
 
     a {
+      padding: 8px;
       display: flex;
       svg {
         width: 20px;
         height: 20px;
+      }
+      &:hover,
+      &:focus {
+        transform: translateY(-3px);
       }
     }
   }

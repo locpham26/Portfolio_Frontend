@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { motion, useViewportScroll } from "framer-motion";
 import { AnchorLink } from "gatsby-plugin-anchor-links";
+import { Logo } from "./icons";
 
 const StyledHeader = styled(motion.header)`
   ${({ theme }) => theme.mixins.flexBetween};
@@ -12,16 +12,29 @@ const StyledHeader = styled(motion.header)`
   top: 0;
   z-index: 5;
   width: 100%;
-  padding: 0px 64px;
+  padding: 0px 40px;
+  .logo-wrapper {
+    width: 32px;
+    height: 32px;
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
   .resume-button {
-    color: white;
-    background-color: var(--primary-purple);
+    color: var(--primary-purple);
+    border: 1px solid var(--primary-purple);
     border-radius: 40px;
     cursor: pointer;
-    padding: 12px 16px;
+    padding: 8px 16px;
     display: flex;
     justify-content: center;
     align-items: center;
+    &:hover {
+      background-color: rgb(101, 16, 204);
+      color: white;
+      border: 1px solid transparent;
+    }
   }
 `;
 
@@ -119,11 +132,11 @@ const Nav = ({ location }) => {
   const { scrollY } = useViewportScroll();
   const scrollListener = () => {
     if (scrollY.current < scrollY.prev) setHidden(false);
-    else if (scrollY.current > 350) {
+    else if (scrollY.current > 200) {
       setOverHero(true);
       if (scrollY.current > scrollY.prev) setHidden(true);
     }
-    if (scrollY.current <= 350) setOverHero(false);
+    if (scrollY.current <= 200) setOverHero(false);
   };
   React.useEffect(() => {
     scrollY.onChange(() => scrollListener());
@@ -144,7 +157,11 @@ const Nav = ({ location }) => {
           "0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)",
       }}
     >
-      <StaticImage src="../images/icon.png" width={64} height={64} alt="logo" />
+      <AnchorLink to="/#hero">
+        <div className="logo-wrapper">
+          <Logo />
+        </div>
+      </AnchorLink>
       <StyledNavList initial="hidden" animate="show" variants={parentVariant}>
         {navItems.map((item) => (
           <StyledLinkWrapper

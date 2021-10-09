@@ -3,6 +3,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "../styles";
 import Nav from "./Nav";
 import Side from "./Side";
+import Head from "./Head";
 
 const StyledContent = styled.div`
   min-height: 100vh;
@@ -20,6 +21,7 @@ const StyledMain = styled.main`
 const Layout = ({ location, children }) => {
   return (
     <div id="root">
+      <Head />
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <StyledContent>

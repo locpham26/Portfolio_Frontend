@@ -9,3 +9,5 @@ export { default as GithubIcon } from "./github";
 export { default as FacebookIcon } from "./facebook";
 export { default as LinkedInIcon } from "./linkedin";
 export { default as InstaIcon } from "./insta";
+export { default as Logo } from "./logo";
+export { default as Decoration } from "./decoration";

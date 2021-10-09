@@ -1,8 +1,10 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 import { DesignIcon, MobileIcon, WebIcon } from "../icons";
+import { motion } from "framer-motion";
 
 const StyledAboutSection = styled.section`
+  /* border-bottom: 1px solid grey; */
   width: 80%;
   margin: 0 auto;
   display: flex;
@@ -18,6 +20,28 @@ const StyledAboutSection = styled.section`
       color: var(--primary-purple);
     }
   }
+  .resume-button {
+    border: 1px solid var(--primary-purple);
+    color: var(--primary-purple);
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 18px;
+    width: fit-content;
+    padding: 12px 24px;
+    background-color: white;
+    cursor: pointer;
+    margin-top: 24px;
+    transition: 0.4s;
+    &:hover,
+    &:focus {
+      /* background-color: rgb(101, 16, 204); */
+      color: white;
+      border: 1px solid ${({ theme }) => theme.mainPurple};
+      box-shadow: inset 0 0 0 2em ${({ theme }) => theme.mainPurple};
+
+      transform: translateY(-4px);
+    }
+  }
 `;
 
 const StyledSkillList = styled.div`
@@ -26,31 +50,51 @@ const StyledSkillList = styled.div`
   margin-top: 32px;
   .skill-box-inner {
     width: 100%;
-    display: flex;
-    justify-content: space-around;
-    /* align-items: center; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(26%, 1fr));
+    grid-gap: 64px;
   }
 `;
 
 const StyledSkillCard = styled.div`
-  width: 28%;
-  /* margin: 0px auto; */
-  height: 100%;
+  position: relative;
+  border-radius: var(--border-radius);
+  border: 1px solid #dddeee;
+  &:hover {
+    box-shadow: 4px 4px 10px rgb(0 0 0 / 16%);
+  }
+  .decoration-dots {
+    position: absolute;
+    left: 100%;
+    top: 128px;
+    width: fit-content;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 0;
+    .dot {
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: ${({ color }) => color};
+      margin: 8px 4px;
+    }
+  }
   .skill-card-inner {
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
-    background-color: #fff4ff;
-    padding: 24px;
+    align-items: center;
+    background-color: transparent;
+    padding: 40px;
     border-radius: var(--border-radius);
     .icon-wrapper {
-      width: 48px;
-      height: 48px;
-      background-color: white;
+      width: 64px;
+      height: 64px;
+      background-color: ${({ color }) => color};
       border-radius: 12px;
       ${({ theme }) => theme.mixins.flexCenter};
       box-sizing: border-box;
-      margin-bottom: 16px;
+      margin-bottom: 40px;
     }
     .title {
       font-weight: 500;
@@ -58,10 +102,13 @@ const StyledSkillCard = styled.div`
       box-sizing: border-box;
       color: var(--primary-text);
       margin-bottom: 16px;
+      text-align: center;
     }
     .description {
       color: var(--primary-text);
       font-size: 16px;
+      text-align: center;
+      color: var(--secondary-text);
     }
   }
 `;
@@ -97,7 +144,31 @@ const skillItems = [
   },
 ];
 
+const dotParentVariant = {
+  start: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+  end: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const dotVariant = {
+  start: {
+    y: 0,
+  },
+  end: {
+    y: 8,
+  },
+};
+
 const About = () => {
+  const { mainBlue, mainPink, mainPurple } = useContext(ThemeContext);
+  const colorList = [mainPurple, mainBlue, mainPink];
   return (
     <StyledAboutSection id="about">
       <div className="section-title">About me</div>
@@ -107,15 +178,33 @@ const About = () => {
       </p>
       <p className="intro-text">{jobText}</p>
       <p className="intro-text">{additionalText}</p>
+      <div className="resume-button">View My Resume</div>
       <StyledSkillList>
         <div className="skill-box-inner">
-          {skillItems.map((item) => (
-            <StyledSkillCard key={item.key}>
+          {skillItems.map((item, index) => (
+            <StyledSkillCard key={item.key} color={colorList[index]}>
               <div className="skill-card-inner">
                 <div className="icon-wrapper">{item.icon}</div>
                 <div className="title">{item.title}</div>
                 <div className="description">{item.description}</div>
               </div>
+              {index !== 2 && (
+                <motion.div
+                  className="decoration-dots"
+                  variants={dotParentVariant}
+                  initial="start"
+                  animate="end"
+                >
+                  {[0, 1, 2, 3, 4].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="dot"
+                      variants={dotVariant}
+                      transition={{ duration: 0.3, yoyo: Infinity }}
+                    ></motion.div>
+                  ))}
+                </motion.div>
+              )}
             </StyledSkillCard>
           ))}
         </div>

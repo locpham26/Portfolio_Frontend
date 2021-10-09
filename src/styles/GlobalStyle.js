@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
         width: 100%;
         min-height: 100%;
         overflow-x: hidden;
-        line-height: 1.25;
+        line-height: 1.4;
         background-color: #fffffe;
         font-family: var(--font-sans);
         -webkit-font-smoothing: antialiased;

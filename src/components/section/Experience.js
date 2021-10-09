@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { DeveloperIcon, EngineerIcon } from "../icons";
+import { DeveloperIcon, EngineerIcon, Decoration } from "../icons";
 import { graphql, useStaticQuery } from "gatsby";
 
 const StyledExperienceSection = styled.section`
@@ -21,6 +21,7 @@ const StyledJobList = styled.ul`
 const StyledJobItem = styled.li`
   margin-bottom: 48px;
   .item-inner {
+    position: relative;
     display: flex;
     flex-direction: ${({ isOdd }) => (isOdd ? "row" : "row-reverse")};
     align-items: center;
@@ -73,18 +74,14 @@ const StyledJobDescription = styled.ul`
     box-sizing: border-box;
     margin-bottom: 16px;
     .bullet {
-      width: 16px;
-      height: 16px;
+      width: 8px;
+      height: 8px;
       display: inline-block;
-      border-radius: 4px;
-      background-color: #ffba00;
-      transform: rotate(45deg);
+      border-radius: 50%;
+      background-color: ${({ theme }) => theme.mainBlue};
       position: relative;
-      top: 4px;
+      top: 8px;
       left: 4px;
-      &:hover {
-        transform: rotate(0deg);
-      }
     }
   }
 `;

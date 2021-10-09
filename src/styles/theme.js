@@ -14,9 +14,11 @@ const theme = {
     desktopL: `min-width: 1920px`,
   },
   mixins,
-  mainPurple: "#6510cc",
+  mainPurple: "#7f08fb",
   secondaryPurple: "#C310CC",
   mainYellow: "#FFBA00",
+  mainBlue: "#4DDFFD",
+  mainPink: "#F2B8EB",
 };
 
 export default theme;

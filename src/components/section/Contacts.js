@@ -3,19 +3,16 @@ import styled from "styled-components";
 
 const StyledContactSection = styled.section`
   width: 80%;
-
   margin: 0 auto;
-  .inner {
-    background-color: black;
-    height: 100px;
-    border-radius: var(--border-radius);
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Contacts = () => {
   return (
     <StyledContactSection>
-      <div className="inner"></div>
+      <div className="section-title">Contact Me</div>
     </StyledContactSection>
   );
 };

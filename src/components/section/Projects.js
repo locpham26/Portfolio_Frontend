@@ -45,7 +45,7 @@ const StyledProjectImage = styled.div`
       width: 100%;
       height: 100%;
       position: absolute;
-      background-color: ${({ theme }) => theme.mainPurple};
+      background-color: ${({ color }) => color};
       opacity: 0.13;
       z-index: 1;
     }
@@ -65,7 +65,7 @@ const StyledProjectInfo = styled.div`
     position: relative;
     right: ${({ isOdd }) => (isOdd ? "64px" : "-64px")};
     border-radius: var(--border-radius);
-    border: 1px solid black;
+    border: 1px solid #dddddd;
     background-color: white;
     width: 100%;
     height: 240px;
@@ -153,64 +153,46 @@ const StyledProjectCard = styled.li`
 `;
 
 const Projects = () => {
-  const { mainPurple, secondaryPurple, mainYellow } = useContext(ThemeContext);
+  const { mainPurple, mainBlue, mainPink } = useContext(ThemeContext);
+  const colorList = [mainPurple, mainBlue, mainPink];
   return (
     <ProjectSection id="projects">
       <div className="section-title">Projects</div>
       <StyledProjectList>
-        <StyledProjectItem isOdd={true}>
-          <div className="item-inner">
-            <StyledProjectImage>
-              <div className="image-inner">
-                <StaticImage
-                  className="project-item-image"
-                  src="../../images/background.jpg"
-                  alt="bg"
-                />
-              </div>
-            </StyledProjectImage>
-            <StyledProjectInfo isOdd={true} decorationColor={mainPurple}>
-              <div className="info-inner">
-                <div className="decoration"></div>
-                <div className="project-item-name">Werewolf Board Game</div>
-                <div className="project-item-description">
-                  A simple online board game that allowed users to play and chat
-                  simultaneously. A simple online board game that allowed users
-                  to play and chat simultaneously. A simple online board game
-                  that allowed users to play and chat simultaneously
+        {[0, 1, 2].map((_, index) => (
+          <StyledProjectItem isOdd={(index + 1) % 2 !== 0}>
+            <div className="item-inner">
+              <StyledProjectImage color={colorList[index]}>
+                <div className="image-inner">
+                  <StaticImage
+                    className="project-item-image"
+                    src="../../images/background.jpg"
+                    alt="bg"
+                  />
                 </div>
-                <ul className="project-item-tool-list">
-                  <li>Vue</li>
-                  <li>Django</li>
-                </ul>
-              </div>
-            </StyledProjectInfo>
-          </div>
-        </StyledProjectItem>
-        <StyledProjectItem isOdd={false}>
-          <div className="item-inner">
-            <StyledProjectImage>
-              <div className="image-inner"></div>
-            </StyledProjectImage>
-            <StyledProjectInfo isOdd={false} decorationColor={secondaryPurple}>
-              <div className="info-inner">
-                <div className="decoration"></div>
-              </div>
-            </StyledProjectInfo>
-          </div>
-        </StyledProjectItem>
-        <StyledProjectItem isOdd={true}>
-          <div className="item-inner">
-            <StyledProjectImage>
-              <div className="image-inner"></div>
-            </StyledProjectImage>
-            <StyledProjectInfo isOdd={true} decorationColor={mainYellow}>
-              <div className="info-inner">
-                <div className="decoration"></div>
-              </div>
-            </StyledProjectInfo>
-          </div>
-        </StyledProjectItem>
+              </StyledProjectImage>
+              <StyledProjectInfo
+                isOdd={(index + 1) % 2 !== 0}
+                decorationColor={colorList[index]}
+              >
+                <div className="info-inner">
+                  <div className="decoration"></div>
+                  <div className="project-item-name">Werewolf Board Game</div>
+                  <div className="project-item-description">
+                    A simple online board game that allowed users to play and
+                    chat simultaneously. A simple online board game that allowed
+                    users to play and chat simultaneously. A simple online board
+                    game that allowed users to play and chat simultaneously
+                  </div>
+                  <ul className="project-item-tool-list">
+                    <li>Vue</li>
+                    <li>Django</li>
+                  </ul>
+                </div>
+              </StyledProjectInfo>
+            </div>
+          </StyledProjectItem>
+        ))}
       </StyledProjectList>
       <div className="section-title">Other Projects</div>
       <StyledOtherContainer>

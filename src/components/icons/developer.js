@@ -29,7 +29,7 @@ const DeveloperIcon = () => (
       width="388.406"
       height="16.501"
       transform="translate(137.175)"
-      fill="#6510cc"
+      fill="#7f08fb"
     />
     <circle
       id="Ellipse_90"
@@ -72,7 +72,7 @@ const DeveloperIcon = () => (
       width="122.803"
       height="28.63"
       transform="translate(273.747 51.334)"
-      fill="#6510cc"
+      fill="#7f08fb"
     />
     <rect
       id="Rectangle_64"
@@ -80,7 +80,7 @@ const DeveloperIcon = () => (
       width="122.803"
       height="30.804"
       transform="translate(273.747 81.652)"
-      fill="#c310cc"
+      fill="#4DDFFD"
     />
     <rect
       id="Rectangle_65"
@@ -88,7 +88,7 @@ const DeveloperIcon = () => (
       width="122.803"
       height="28.63"
       transform="translate(273.747 114.656)"
-      fill="#ffba00"
+      fill="#F2B8EB"
     />
     <path
       id="Path_31"
@@ -196,7 +196,7 @@ const DeveloperIcon = () => (
       data-name="Path 43"
       d="M287.982,293.823l3.641,19.544L264.948,381.9l-3.463-22.047Z"
       transform="translate(-85.677 -89.891)"
-      fill="#6510cc"
+      fill="#7f08fb"
     />
     <path
       id="Path_44"
