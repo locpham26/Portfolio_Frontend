@@ -11,3 +11,5 @@ export { default as LinkedInIcon } from "./linkedin";
 export { default as InstaIcon } from "./insta";
 export { default as Logo } from "./logo";
 export { default as Decoration } from "./decoration";
+export { default as ChevronLeft } from "./chevronLeft";
+export { default as ChevronRight } from "./chevronRight";
