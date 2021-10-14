@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { ChevronRight, ChevronLeft } from "../icons";
 
 const StyledGallerySection = styled.section`
   width: 80%;
@@ -11,57 +12,52 @@ const StyledGallerySection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  .inner {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-  }
 `;
 
-const StyledLeftCol = styled.div`
-  flex: 0 0 50%;
-  position: relative;
-  .left-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    .gallery-image {
-      border-radius: var(--border-radius);
-      max-width: 100%;
-    }
-    .left-inner-bottom {
-      display: flex;
-      gap: 16px;
-      .gallery-image {
-        border-radius: var(--border-radius);
-        width: 50%;
-      }
-    }
-  }
-`;
-
-const StyledRightCol = styled.div`
-  flex: 0 0 30%;
-  /* height: 100%; */
-  position: relative;
-  .right-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: stretch;
-    justify-content: space-between;
-    .gallery-image {
-      border-radius: var(--border-radius);
-      max-width: 100%;
-    }
-    .clarification-text {
-      color: white;
-      border-radius: var(--border-radius);
-      background-color: var(--primary-purple);
+const StyledCarousel = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+  align-items: center;
+  .icon-wrapper {
+    width: 24px;
+    svg {
       width: 100%;
-      padding: 24px;
     }
   }
+`;
+
+const StyledCarouselItem = styled.div`
+  position: relative;
+  width: 800px;
+  height: 800px;
+  display: ${({ active }) => (active ? "block" : "none")};
+  .carousel-image {
+    border-radius: var(--border-radius);
+  }
+`;
+
+const StyledDots = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 24px;
+  ul {
+    list-style: none;
+    margin: 0%;
+    padding: 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+`;
+
+const StyledDot = styled.li`
+  position: relative;
+  width: ${({ active }) => (active ? "12px" : "8px")};
+  height: ${({ active }) => (active ? "12px" : "8px")};
+  border-radius: 50%;
+  background-color: ${({ active }) => (active ? "purple" : "gray")};
 `;
 
 export const query = graphql`
@@ -79,55 +75,49 @@ export const query = graphql`
     }
   }
 `;
+
 const Gallery = () => {
   const {
     allStrapiGallery: { nodes: gallery },
   } = useStaticQuery(query);
-  const [ams_cup, limitless, basketball, soccer, olympiams, sixth_design] =
-    gallery[0].media_list;
+  const carouselLength = gallery[0].media_list.length;
+  const [activeSlide, setActiveSlide] = useState(0);
+  const getNext = () => {
+    if (activeSlide === carouselLength - 1) setActiveSlide(0);
+    else setActiveSlide(activeSlide + 1);
+  };
+  const getPrev = () => {
+    if (activeSlide === 0) setActiveSlide(carouselLength - 1);
+    else setActiveSlide(activeSlide - 1);
+  };
   return (
     <StyledGallerySection id="other">
       <div className="section-title">Other Works</div>
-      <div className="inner">
-        <StyledLeftCol>
-          <div className="left-inner">
+      <StyledCarousel>
+        <div className="icon-wrapper" onClick={() => getPrev()}>
+          <ChevronLeft />
+        </div>
+        {gallery[0].media_list.map((item, index) => (
+          <StyledCarouselItem key={index} active={index === activeSlide}>
             <GatsbyImage
-              className="gallery-image"
-              image={getImage(soccer.localFile)}
-              alt="first"
+              className="carousel-image"
+              image={getImage(item.localFile)}
+              alt={`${index} image`}
+              key={index}
             />
-            <div className="left-inner-bottom">
-              <GatsbyImage
-                className="gallery-image"
-                image={getImage(ams_cup.localFile)}
-                alt="third"
-              />
-              <GatsbyImage
-                className="gallery-image"
-                image={getImage(olympiams.localFile)}
-                alt="fourth"
-              />
-            </div>
-          </div>
-        </StyledLeftCol>
-        <StyledRightCol>
-          <div className="right-inner">
-            <GatsbyImage
-              className="gallery-image"
-              image={getImage(basketball.localFile)}
-              alt="second"
-            />
-            <GatsbyImage
-              className="gallery-image"
-              image={getImage(limitless.localFile)}
-              alt="second"
-            />
-            <div className="clarification-text">
-              Apart from being a software engineer
-            </div>
-          </div>
-        </StyledRightCol>
-      </div>
+          </StyledCarouselItem>
+        ))}
+        <div className="icon-wrapper" onClick={() => getNext()}>
+          <ChevronRight />
+        </div>
+      </StyledCarousel>
+      <StyledDots>
+        <ul>
+          {gallery[0].media_list.map((item, index) => (
+            <StyledDot key={index} active={index === activeSlide}></StyledDot>
+          ))}
+        </ul>
+      </StyledDots>
     </StyledGallerySection>
   );
 };
