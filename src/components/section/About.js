@@ -34,7 +34,6 @@ const StyledAboutSection = styled.section`
     transition: 0.4s;
     &:hover,
     &:focus {
-      /* background-color: rgb(101, 16, 204); */
       color: white;
       border: 1px solid ${({ theme }) => theme.mainPurple};
       box-shadow: inset 0 0 0 2em ${({ theme }) => theme.mainPurple};

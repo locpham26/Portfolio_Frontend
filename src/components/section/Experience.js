@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { DeveloperIcon, EngineerIcon, Decoration } from "../icons";
+import { DeveloperIcon, EngineerIcon, WorkIcon } from "../icons";
 import { graphql, useStaticQuery } from "gatsby";
 
 const StyledExperienceSection = styled.section`
@@ -9,23 +9,13 @@ const StyledExperienceSection = styled.section`
   align-items: center;
   width: 80%;
   margin: 0 auto;
-`;
-
-const StyledJobList = styled.ul`
-  list-style: none;
-  padding: 0px;
-  margin: 0px;
-  width: 100%;
-`;
-
-const StyledJobItem = styled.li`
-  margin-bottom: 48px;
-  .item-inner {
-    position: relative;
+  margin-bottom: 192px;
+  .inner {
     display: flex;
-    flex-direction: ${({ isOdd }) => (isOdd ? "row" : "row-reverse")};
+    flex-direction: column;
     align-items: center;
-    gap: 96px;
+    width: 100%;
+    gap: 48px;
   }
 `;
 
@@ -103,7 +93,53 @@ export const query = graphql`
   }
 `;
 
-const imageList = [<DeveloperIcon />, <EngineerIcon />];
+const StyledTabsContainer = styled.div`
+  .tab-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+`;
+
+const StyledTab = styled.li`
+  padding: 12px 24px;
+  box-sizing: border-box;
+  margin-right: 16px;
+  border-radius: 32px;
+  cursor: pointer;
+  color: ${({ active, theme }) => (active ? theme.mainPurple : "grey")};
+  background-color: ${({ active }) => active && "#F3E8FF"};
+  &:hover {
+    color: ${({ theme }) => theme.mainPurple};
+    background-color: #f3e8ff;
+  }
+  font-weight: 500;
+  position: relative;
+`;
+
+const StyledJobWrapper = styled.div`
+  width: 100%;
+  max-width: 1000px;
+  position: relative;
+
+  .job-inner {
+    border-radius: var(--border-radius);
+    border: 1px solid #dddeee;
+    height: 400px;
+  }
+  .image-wrapper {
+    position: absolute;
+    bottom: -100px;
+    left: 75%;
+    z-index: 2;
+    height: 300px;
+    svg {
+      max-width: 100%;
+      height: 100%;
+    }
+  }
+`;
 
 const Experience = () => {
   const {
@@ -112,32 +148,20 @@ const Experience = () => {
   return (
     <StyledExperienceSection id="experience">
       <div className="section-title">Experience</div>
-      <StyledJobList>
-        {jobs.map((item, index) => (
-          <StyledJobItem key={item.strapiId} isOdd={(index + 1) % 2 !== 0}>
-            <div className="item-inner">
-              <StyledJobImageContainer>
-                {imageList[index]}
-              </StyledJobImageContainer>
-              <StyledJobDescriptionWrapper>
-                <p className="position">
-                  {item.position}
-                  <span className="organization-name"> @{item.company}</span>
-                </p>
-                <p className="period">{item.duration}</p>
-                <StyledJobDescription>
-                  {item.description.map((desc) => (
-                    <li key={desc.id}>
-                      <span className="bullet" />
-                      {desc.detail}
-                    </li>
-                  ))}
-                </StyledJobDescription>
-              </StyledJobDescriptionWrapper>
-            </div>
-          </StyledJobItem>
-        ))}
-      </StyledJobList>
+      <div className="inner">
+        <StyledTabsContainer>
+          <ul className="tab-list">
+            <StyledTab active={true}>MISA JSC</StyledTab>
+            <StyledTab>Eastgate Software</StyledTab>
+          </ul>
+        </StyledTabsContainer>
+        <StyledJobWrapper>
+          <div className="job-inner"></div>
+          <div className="image-wrapper">
+            <WorkIcon />
+          </div>
+        </StyledJobWrapper>
+      </div>
     </StyledExperienceSection>
   );
 };
