@@ -8,7 +8,7 @@ const ProjectSection = styled.section`
   align-items: center;
   width: 80%;
   margin: 0 auto;
-  margin-bottom: 96px;
+  margin-bottom: 192px;
 `;
 
 const StyledProjectList = styled.ul`
@@ -169,7 +169,7 @@ const Projects = () => {
       <div className="section-title">Projects</div>
       <StyledProjectList>
         {[0, 1, 2].map((_, index) => (
-          <StyledProjectItem isOdd={(index + 1) % 2 !== 0}>
+          <StyledProjectItem key={index} isOdd={(index + 1) % 2 !== 0}>
             <div className="item-inner">
               <StyledProjectImage color={colorList[index]}>
                 <div className="image-inner">

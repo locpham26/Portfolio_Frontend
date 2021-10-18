@@ -16,13 +16,21 @@ const StyledGallerySection = styled.section`
 
 const StyledCarousel = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   gap: 64px;
   align-items: center;
   .icon-wrapper {
-    width: 24px;
+    width: 40px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: var(--border-radius);
+    transition: 0.4s;
+    &:hover {
+      background-color: #f3e8ff;
+    }
     svg {
       width: 100%;
+      fill: #333333;
     }
   }
 `;
@@ -54,10 +62,24 @@ const StyledDots = styled.div`
 
 const StyledDot = styled.li`
   position: relative;
-  width: ${({ active }) => (active ? "12px" : "8px")};
-  height: ${({ active }) => (active ? "12px" : "8px")};
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background-color: ${({ active }) => (active ? "purple" : "gray")};
+  background-color: transparent;
+  padding: 2px;
+  border: 1px solid #aaabbb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  .dot-inner {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    transition: 0.4s;
+    background-color: ${({ active, theme }) =>
+      active ? theme.mainPurple : "transparent"};
+  }
 `;
 
 export const query = graphql`
@@ -90,6 +112,9 @@ const Gallery = () => {
     if (activeSlide === 0) setActiveSlide(carouselLength - 1);
     else setActiveSlide(activeSlide - 1);
   };
+  const getToImage = (imageIndex) => {
+    setActiveSlide(imageIndex);
+  };
   return (
     <StyledGallerySection id="other">
       <div className="section-title">Other Works</div>
@@ -114,7 +139,13 @@ const Gallery = () => {
       <StyledDots>
         <ul>
           {gallery[0].media_list.map((item, index) => (
-            <StyledDot key={index} active={index === activeSlide}></StyledDot>
+            <StyledDot
+              key={index}
+              active={index === activeSlide}
+              onClick={() => getToImage(index)}
+            >
+              <div className="dot-inner"></div>
+            </StyledDot>
           ))}
         </ul>
       </StyledDots>

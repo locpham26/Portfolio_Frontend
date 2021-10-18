@@ -39,7 +39,7 @@ const GlobalStyle = createGlobalStyle`
 
     html {
         scrollbar-width: thin;
-        scrollbar-color: var(--secondary-text);
+        /* scrollbar-color: #dddeee; */
         /* scroll-behavior: smooth; */
     }
 
@@ -48,12 +48,13 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body::-webkit-scrollbar-track {
-        background-color: transparent
+        background-color: transparent;
+        border: 1px solid #dddddd;
+        padding: 2px;
     }
 
     body::-webkit-scrollbar-thumb {
-        background-color: var(--secondary-text);
-        border: 3px solid transparent;
+        background-color: #cccccc;
         border-radius: 12px;
     }
 

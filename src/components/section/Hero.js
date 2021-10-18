@@ -6,8 +6,9 @@ import { StaticImage } from "gatsby-plugin-image";
 import { MailIcon, PhoneIcon } from "../icons";
 
 const StyledHeroSection = styled.section`
-  min-height: 100vh;
+  /* min-height: 100vh; */
   width: 100%;
+  margin-bottom: 192px;
 `;
 
 const StyledHeroBackground = styled(BackgroundImage)`

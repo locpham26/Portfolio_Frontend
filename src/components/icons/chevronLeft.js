@@ -1,18 +1,8 @@
 import React from "react";
 
 const ChevronLeft = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="18.634"
-    height="30.704"
-    viewBox="0 0 18.634 30.704"
-  >
-    <path
-      id="Icon_awesome-chevron-left"
-      dataname="Icon awesome-chevron-left"
-      d="M2.427,16.807,16.092,3.142a1.688,1.688,0,0,1,2.386,0l1.594,1.594a1.688,1.688,0,0,1,0,2.384L9.245,18l10.83,10.881a1.687,1.687,0,0,1,0,2.384l-1.594,1.594a1.688,1.688,0,0,1-2.386,0L2.427,19.193A1.688,1.688,0,0,1,2.427,16.807Z"
-      transform="translate(-1.933 -2.648)"
-    />
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+    <path d="M872 572H266.8l144.3-183c4.1-5.2.4-13-6.3-13H340c-9.8 0-19.1 4.5-25.1 12.2l-164 208c-16.5 21-1.6 51.8 25.1 51.8h696c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z" />
   </svg>
 );
 

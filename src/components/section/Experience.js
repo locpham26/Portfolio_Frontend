@@ -165,6 +165,7 @@ const Experience = () => {
           <ul className="tab-list">
             {jobs.map((item, index) => (
               <StyledTab
+                key={item.company}
                 onClick={() => setActiveJob(index)}
                 active={index === activeJob}
               >
