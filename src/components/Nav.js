@@ -1,5 +1,4 @@
 import React from "react";
-import { StaticImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { motion, useViewportScroll } from "framer-motion";
 import { AnchorLink } from "gatsby-plugin-anchor-links";

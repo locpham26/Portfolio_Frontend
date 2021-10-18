@@ -1,6 +1,4 @@
 export { default as WebIcon } from "./web";
-export { default as DeveloperIcon } from "./developer";
-export { default as EngineerIcon } from "./engineer";
 export { default as MobileIcon } from "./mobile";
 export { default as DesignIcon } from "./design";
 export { default as MailIcon } from "./mail";
@@ -13,4 +11,3 @@ export { default as Logo } from "./logo";
 export { default as Decoration } from "./decoration";
 export { default as ChevronLeft } from "./chevronLeft";
 export { default as ChevronRight } from "./chevronRight";
-export { default as WorkIcon } from "./work";

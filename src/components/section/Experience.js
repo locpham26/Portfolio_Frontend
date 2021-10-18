@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { DeveloperIcon, EngineerIcon, WorkIcon } from "../icons";
 import { graphql, useStaticQuery } from "gatsby";
+import Lottie from "react-lottie";
+import { firstAnimation, secondAnimation } from "../animation";
 
 const StyledExperienceSection = styled.section`
   display: flex;
@@ -13,40 +14,92 @@ const StyledExperienceSection = styled.section`
   .inner {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
     gap: 48px;
   }
 `;
 
-const StyledJobImageContainer = styled.div`
-  flex: 0 0 320px;
-  max-width: 100%;
-  max-height: 400px;
-  svg {
-    max-width: 100%;
-    height: 100%;
+const StyledTabsContainer = styled.div`
+  align-self: flex-start;
+  width: 100%;
+  margin: 24px 0px;
+  .tab-list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    &:before {
+      content: "";
+      display: block;
+      width: 100px;
+      height: 2px;
+      border-top: 2px dashed ${({ theme }) => theme.mainPurple};
+    }
+    &:after {
+      content: "";
+      flex: 1 1 auto;
+      display: block;
+      max-width: 100%;
+      height: 2px;
+      border-top: 2px dashed ${({ theme }) => theme.mainPurple};
+    }
   }
 `;
 
-const StyledJobDescriptionWrapper = styled.div`
-  flex: 1 1 auto;
-  padding: 40px;
-  height: 100%;
-  max-width: 100%;
-  .organization-name {
-    color: var(--primary-purple);
+const StyledTab = styled.li`
+  &:hover {
+    color: ${({ theme }) => theme.mainPurple};
+    background-color: #f3e8ff;
+    transform: translateY(-4px);
   }
-  .position {
-    color: var(--primary-text);
-    font-weight: 600;
-    font-size: 20px;
-    margin-bottom: 8px;
+  padding: 12px 24px;
+  border-radius: 32px;
+  cursor: pointer;
+  color: ${({ theme, active }) =>
+    active ? "white" : theme.mainPurple} !important;
+  background-color: ${({ active, theme }) =>
+    active && theme.mainPurple} !important;
+  border: 1px solid ${({ theme }) => theme.mainPurple};
+  transition: 0.4s;
+
+  font-weight: 500;
+  position: relative;
+`;
+
+const StyledJobWrapper = styled.div`
+  display: ${({ active }) => (active ? "flex" : "none")};
+  width: 100%;
+  align-items: flex-end;
+  .job-inner {
+    flex: 1 1 auto;
+    border-radius: var(--border-radius);
+    border: 1px solid #dddeee;
+    min-height: 400px;
+    padding: 40px;
+    &:hover {
+      box-shadow: 4px 4px 10px rgb(0 0 0 / 16%);
+    }
+    .organization-name {
+      color: var(--primary-purple);
+      font-weight: 500;
+      font-size: 20px;
+    }
+    .position {
+      color: var(--primary-text);
+      font-weight: 500;
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+    .period {
+      color: var(--secondary-text);
+      font-size: 18px;
+      margin-bottom: 24px;
+    }
   }
-  .period {
-    color: var(--secondary-text);
-    font-size: 18px;
-    margin-bottom: 24px;
+  .image-wrapper {
+    flex: 0 0 auto;
   }
 `;
 
@@ -76,6 +129,73 @@ const StyledJobDescription = styled.ul`
   }
 `;
 
+const firstOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: firstAnimation,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
+
+const secondOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: secondAnimation,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
+
+const animationList = [
+  <Lottie options={secondOptions} width={560} height={400} />,
+  <Lottie options={firstOptions} width={560} height={400} />,
+];
+
+const Experience = () => {
+  const {
+    allStrapiJobs: { nodes: jobs },
+  } = useStaticQuery(query);
+  const [activeJob, setActiveJob] = useState(0);
+  return (
+    <StyledExperienceSection id="experience">
+      <div className="section-title">Experience</div>
+      <div className="inner">
+        <StyledTabsContainer>
+          <ul className="tab-list">
+            {jobs.map((item, index) => (
+              <StyledTab
+                onClick={() => setActiveJob(index)}
+                active={index === activeJob}
+              >
+                {item.company}
+              </StyledTab>
+            ))}
+          </ul>
+        </StyledTabsContainer>
+        {jobs.map((item, index) => (
+          <StyledJobWrapper key={index} active={index === activeJob}>
+            <div className="image-wrapper">{animationList[index]}</div>
+            <div className="job-inner">
+              <span className="position">{item.position} </span>
+              <span className="organization-name">@{item.company}</span>
+              <div className="period">{item.duration}</div>
+              <StyledJobDescription>
+                {item.description.map((desc) => (
+                  <li key={desc.id}>
+                    <span className="bullet"></span>
+                    {desc.detail}
+                  </li>
+                ))}
+              </StyledJobDescription>
+            </div>
+          </StyledJobWrapper>
+        ))}
+      </div>
+    </StyledExperienceSection>
+  );
+};
+
 export const query = graphql`
   {
     allStrapiJobs {
@@ -92,78 +212,5 @@ export const query = graphql`
     }
   }
 `;
-
-const StyledTabsContainer = styled.div`
-  .tab-list {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-`;
-
-const StyledTab = styled.li`
-  padding: 12px 24px;
-  box-sizing: border-box;
-  margin-right: 16px;
-  border-radius: 32px;
-  cursor: pointer;
-  color: ${({ active, theme }) => (active ? theme.mainPurple : "grey")};
-  background-color: ${({ active }) => active && "#F3E8FF"};
-  &:hover {
-    color: ${({ theme }) => theme.mainPurple};
-    background-color: #f3e8ff;
-  }
-  font-weight: 500;
-  position: relative;
-`;
-
-const StyledJobWrapper = styled.div`
-  width: 100%;
-  max-width: 1000px;
-  position: relative;
-
-  .job-inner {
-    border-radius: var(--border-radius);
-    border: 1px solid #dddeee;
-    height: 400px;
-  }
-  .image-wrapper {
-    position: absolute;
-    bottom: -100px;
-    left: 75%;
-    z-index: 2;
-    height: 300px;
-    svg {
-      max-width: 100%;
-      height: 100%;
-    }
-  }
-`;
-
-const Experience = () => {
-  const {
-    allStrapiJobs: { nodes: jobs },
-  } = useStaticQuery(query);
-  return (
-    <StyledExperienceSection id="experience">
-      <div className="section-title">Experience</div>
-      <div className="inner">
-        <StyledTabsContainer>
-          <ul className="tab-list">
-            <StyledTab active={true}>MISA JSC</StyledTab>
-            <StyledTab>Eastgate Software</StyledTab>
-          </ul>
-        </StyledTabsContainer>
-        <StyledJobWrapper>
-          <div className="job-inner"></div>
-          <div className="image-wrapper">
-            <WorkIcon />
-          </div>
-        </StyledJobWrapper>
-      </div>
-    </StyledExperienceSection>
-  );
-};
 
 export default Experience;

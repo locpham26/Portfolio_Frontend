@@ -37,7 +37,6 @@ const StyledAboutSection = styled.section`
       color: white;
       border: 1px solid ${({ theme }) => theme.mainPurple};
       box-shadow: inset 0 0 0 2em ${({ theme }) => theme.mainPurple};
-
       transform: translateY(-4px);
     }
   }

@@ -126,6 +126,11 @@ const StyledOtherContainer = styled.section`
 const StyledProjectCard = styled.li`
   position: relative;
   width: 100%;
+  border-radius: var(--border-radius);
+  border: 1px solid #dddeee;
+  &:hover {
+    box-shadow: 4px 4px 10px rgb(0 0 0 / 16%);
+  }
   .project-card-inner {
     display: flex;
     flex-direction: column;
@@ -133,15 +138,19 @@ const StyledProjectCard = styled.li`
     height: 100%;
     padding: 16px;
     border-radius: var(--border-radius);
-    background-color: #fff4ff;
+    background-color: white;
     .project-name {
       font-size: 20px;
       font-weight: 500;
+      margin-bottom: 16px;
+      box-sizing: border-box;
       color: var(--primary-text);
     }
     .project-description {
       font-size: 16px;
-      font-weight: 400;
+      margin: 0px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
       color: var(--secondary-text);
     }
     .project-stack {
