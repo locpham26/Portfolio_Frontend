@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 
 const StyledAboutSection = styled.section`
   width: 100%;
-  background-color: #f6f4ff;
-  padding: 40px;
   .inner {
     width: 80%;
     margin: 0 auto;
@@ -26,7 +24,7 @@ const StyledAboutSection = styled.section`
     .resume-button {
       border: 1px solid var(--primary-purple);
       color: var(--primary-purple);
-      border-radius: 8px;
+      border-radius: 32px;
       font-weight: 400;
       font-size: 18px;
       width: fit-content;
@@ -204,7 +202,11 @@ const About = () => {
                         key={i}
                         className="dot"
                         variants={dotVariant}
-                        transition={{ duration: 0.3, yoyo: Infinity }}
+                        transition={{
+                          duration: 0.3,
+                          repeat: Infinity,
+                          repeatType: "reverse",
+                        }}
                       ></motion.div>
                     ))}
                   </motion.div>

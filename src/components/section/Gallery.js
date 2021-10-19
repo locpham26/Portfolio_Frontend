@@ -23,6 +23,9 @@ const StyledCarousel = styled.div`
     width: 40px;
     cursor: pointer;
     padding: 4px;
+    border: none;
+    outline: none;
+    background-color: transparent;
     border-radius: var(--border-radius);
     transition: 0.4s;
     &:hover {
@@ -121,9 +124,9 @@ const Gallery = () => {
     <StyledGallerySection id="other">
       <div className="section-title">Other Works</div>
       <StyledCarousel>
-        <div className="icon-wrapper" onClick={() => getPrev()}>
+        <button className="icon-wrapper" onClick={getPrev}>
           <ChevronLeft />
-        </div>
+        </button>
         {gallery[0].media_list.map((item, index) => (
           <StyledCarouselItem key={index} active={index === activeSlide}>
             <GatsbyImage
@@ -134,9 +137,9 @@ const Gallery = () => {
             />
           </StyledCarouselItem>
         ))}
-        <div className="icon-wrapper" onClick={() => getNext()}>
+        <button className="icon-wrapper" onClick={getNext}>
           <ChevronRight />
-        </div>
+        </button>
       </StyledCarousel>
       <StyledDots>
         <ul>

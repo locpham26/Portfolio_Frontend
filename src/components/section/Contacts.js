@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Lottie from "react-lottie";
+import Lottie from "react-lottie-player";
 import { paperPlaneAnimation } from "../animation";
 
 const StyledContactSection = styled.section`
@@ -61,15 +61,6 @@ const StyledContactForm = styled.form`
   }
 `;
 
-const planeAnimationOptions = {
-  loop: true,
-  autoplay: true,
-  animationData: paperPlaneAnimation,
-  rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice",
-  },
-};
-
 const Contacts = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -100,7 +91,12 @@ const Contacts = () => {
     <StyledContactSection>
       <div className="section-title">Contact Me</div>
       <StyledContactContainer>
-        <Lottie options={planeAnimationOptions} width={400} height="auto" />
+        <Lottie
+          play
+          loop
+          animationData={paperPlaneAnimation}
+          style={{ width: 400 }}
+        />
         <StyledContactForm onSubmit={onSubmit}>
           <div style={{ display: "flex", gap: "16px", marginBottom: "32px" }}>
             <div

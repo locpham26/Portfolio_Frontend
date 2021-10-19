@@ -4,9 +4,10 @@ import { graphql, useStaticQuery } from "gatsby";
 import BackgroundImage from "gatsby-background-image";
 import { StaticImage } from "gatsby-plugin-image";
 import { MailIcon, PhoneIcon } from "../icons";
+import { motion } from "framer-motion";
 
 const StyledHeroSection = styled.section`
-  /* min-height: 100vh; */
+  min-height: 100vh;
   width: 100%;
   margin-bottom: 192px;
 `;
@@ -18,6 +19,20 @@ const StyledHeroBackground = styled(BackgroundImage)`
     width: 100%;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.7);
+  }
+`;
+
+const StyledHeroDecoration = styled(motion.div)`
+  position: absolute;
+  z-index: 3;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.mainPurple};
+  transition: 0.4s;
+  &:hover {
+    transform: scale(3);
   }
 `;
 
@@ -35,17 +50,6 @@ const StyledHeroInfo = styled.div`
       border-radius: 50%;
       z-index: 2;
     }
-    /* &::before {
-      content: "";
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 3px solid var(--primary-purple);
-      position: absolute;
-      bottom: 12px;
-      right: 12px;
-      z-index: 1;
-    } */
   }
   .hero-info-wrapper {
     position: relative;
@@ -125,6 +129,7 @@ const Hero = () => {
             alt="hero"
             className="hero-image"
           />
+          <StyledHeroDecoration />
         </div>
       </StyledHeroInfo>
     </StyledHeroSection>

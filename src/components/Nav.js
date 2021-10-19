@@ -29,10 +29,12 @@ const StyledHeader = styled(motion.header)`
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 0.4s;
     &:hover {
-      background-color: rgb(101, 16, 204);
       color: white;
-      border: 1px solid transparent;
+      border: 1px solid ${({ theme }) => theme.mainPurple};
+      box-shadow: inset 0 0 0 2em ${({ theme }) => theme.mainPurple};
+      transform: translateY(-4px);
     }
   }
 `;
@@ -168,7 +170,9 @@ const Nav = ({ location }) => {
             className={location.hash === item.to ? "active" : ""}
             variants={childrenVariants}
           >
-            <AnchorLink to={item.to}>{item.label}</AnchorLink>
+            <AnchorLink to={item.to} stripHash>
+              {item.label}
+            </AnchorLink>
             <StyledLinkDecoration className="decoration-item" />
           </StyledLinkWrapper>
         ))}

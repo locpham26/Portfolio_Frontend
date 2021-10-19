@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { graphql, useStaticQuery } from "gatsby";
-import Lottie from "react-lottie";
+// import Lottie from "react-lottie";
 import { firstAnimation, secondAnimation } from "../animation";
+import Lottie from "react-lottie-player";
 
 const StyledExperienceSection = styled.section`
   display: flex;
@@ -129,27 +130,37 @@ const StyledJobDescription = styled.ul`
   }
 `;
 
-const firstOptions = {
-  loop: true,
-  autoplay: true,
-  animationData: firstAnimation,
-  rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice",
-  },
-};
+// const firstOptions = {
+//   loop: true,
+//   autoplay: true,
+//   animationData: firstAnimation,
+//   rendererSettings: {
+//     preserveAspectRatio: "xMidYMid slice",
+//   },
+// };
 
-const secondOptions = {
-  loop: true,
-  autoplay: true,
-  animationData: secondAnimation,
-  rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice",
-  },
-};
+// const secondOptions = {
+//   loop: true,
+//   autoplay: true,
+//   animationData: secondAnimation,
+//   rendererSettings: {
+//     preserveAspectRatio: "xMidYMid slice",
+//   },
+// };
 
 const animationList = [
-  <Lottie options={secondOptions} width={560} height={400} />,
-  <Lottie options={firstOptions} width={560} height={400} />,
+  <Lottie
+    play
+    loop
+    animationData={firstAnimation}
+    style={{ width: 560, height: 400 }}
+  />,
+  <Lottie
+    play
+    loop
+    animationData={secondAnimation}
+    style={{ width: 560, height: 400 }}
+  />,
 ];
 
 const Experience = () => {

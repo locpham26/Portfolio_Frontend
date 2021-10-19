@@ -8,6 +8,7 @@ import Gallery from "../components/section/Gallery";
 import Contacts from "../components/section/Contacts";
 
 const IndexPage = ({ location }) => {
+  console.log(location);
   return (
     <Layout location={location}>
       <Hero />
