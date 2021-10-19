@@ -51,7 +51,7 @@ const StyledTabsContainer = styled.div`
 const StyledTab = styled.li`
   &:hover {
     color: ${({ theme }) => theme.mainPurple};
-    background-color: #f3e8ff;
+    background-color: #f6f4ff;
     transform: translateY(-4px);
   }
   padding: 12px 24px;

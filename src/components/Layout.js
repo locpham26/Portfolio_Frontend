@@ -4,6 +4,7 @@ import { GlobalStyle, theme } from "../styles";
 import Nav from "./Nav";
 import Side from "./Side";
 import Head from "./Head";
+import Footer from "./Footer";
 
 const StyledContent = styled.div`
   min-height: 100vh;
@@ -28,6 +29,7 @@ const Layout = ({ location, children }) => {
           <Nav location={location} />
           <Side />
           <StyledMain>{children}</StyledMain>
+          <Footer />
         </StyledContent>
       </ThemeProvider>
     </div>

@@ -4,10 +4,10 @@ import { FacebookIcon, GithubIcon, InstaIcon, LinkedInIcon } from "./icons";
 
 const StyledSideBar = styled.div`
   position: fixed;
-  bottom: 0;
-  left: 40px;
+  bottom: 64px;
+  right: 40px;
   z-index: 10;
-  right: auto;
+  left: auto;
   width: 40px;
 `;
 
@@ -18,28 +18,24 @@ const StyledSocialList = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
-  &:after {
-    content: "";
-    display: block;
-    width: 1px;
-    height: 80px;
-    margin: 0 auto;
-    background-color: #ffba00;
-  }
   li {
     margin-bottom: 8px;
-    border-radius: 8px;
-
+    border-radius: 50%;
     a {
       padding: 8px;
       display: flex;
       svg {
-        width: 20px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
+        fill: var(--primary-purple);
       }
-      &:hover,
-      &:focus {
-        transform: translateY(-3px);
+    }
+    &:hover {
+      background-color: ${({ theme }) => theme.mainPink};
+      a {
+        svg {
+          fill: #ffffff;
+        }
       }
     }
   }

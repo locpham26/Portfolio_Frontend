@@ -4,40 +4,44 @@ import { DesignIcon, MobileIcon, WebIcon } from "../icons";
 import { motion } from "framer-motion";
 
 const StyledAboutSection = styled.section`
-  /* border-bottom: 1px solid grey; */
-  width: 80%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  margin-bottom: 192px;
-  .intro-text {
-    color: var(--secondary-text);
-    font-size: 16px;
-    text-align: center;
-    .school-name {
-      color: var(--primary-purple);
+  width: 100%;
+  background-color: #f6f4ff;
+  padding: 40px;
+  .inner {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    margin-bottom: 192px;
+    .intro-text {
+      color: var(--secondary-text);
+      font-size: 16px;
+      text-align: center;
+      .school-name {
+        color: var(--primary-purple);
+      }
     }
-  }
-  .resume-button {
-    border: 1px solid var(--primary-purple);
-    color: var(--primary-purple);
-    border-radius: 8px;
-    font-weight: 400;
-    font-size: 18px;
-    width: fit-content;
-    padding: 12px 24px;
-    background-color: white;
-    cursor: pointer;
-    margin-top: 24px;
-    transition: 0.4s;
-    &:hover,
-    &:focus {
-      color: white;
-      border: 1px solid ${({ theme }) => theme.mainPurple};
-      box-shadow: inset 0 0 0 2em ${({ theme }) => theme.mainPurple};
-      transform: translateY(-4px);
+    .resume-button {
+      border: 1px solid var(--primary-purple);
+      color: var(--primary-purple);
+      border-radius: 8px;
+      font-weight: 400;
+      font-size: 18px;
+      width: fit-content;
+      padding: 12px 24px;
+      background-color: white;
+      cursor: pointer;
+      margin-top: 24px;
+      transition: 0.4s;
+      &:hover,
+      &:focus {
+        color: white;
+        border: 1px solid ${({ theme }) => theme.mainPurple};
+        box-shadow: inset 0 0 0 2em ${({ theme }) => theme.mainPurple};
+        transform: translateY(-4px);
+      }
     }
   }
 `;
@@ -58,6 +62,7 @@ const StyledSkillCard = styled.div`
   position: relative;
   border-radius: var(--border-radius);
   border: 1px solid #dddeee;
+  background-color: white;
   &:hover {
     box-shadow: 4px 4px 10px rgb(0 0 0 / 16%);
   }
@@ -169,44 +174,46 @@ const About = () => {
   const colorList = [mainPurple, mainBlue, mainPink];
   return (
     <StyledAboutSection id="about">
-      <div className="section-title">About me</div>
-      <p className="intro-text">
-        {educationText}
-        <span className="school-name">{universityName}</span>.
-      </p>
-      <p className="intro-text">{jobText}</p>
-      <p className="intro-text">{additionalText}</p>
-      <div className="resume-button">View My Resume</div>
-      <StyledSkillList>
-        <div className="skill-box-inner">
-          {skillItems.map((item, index) => (
-            <StyledSkillCard key={item.key} color={colorList[index]}>
-              <div className="skill-card-inner">
-                <div className="icon-wrapper">{item.icon}</div>
-                <div className="title">{item.title}</div>
-                <div className="description">{item.description}</div>
-              </div>
-              {index !== 2 && (
-                <motion.div
-                  className="decoration-dots"
-                  variants={dotParentVariant}
-                  initial="start"
-                  animate="end"
-                >
-                  {[0, 1, 2, 3, 4].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="dot"
-                      variants={dotVariant}
-                      transition={{ duration: 0.3, yoyo: Infinity }}
-                    ></motion.div>
-                  ))}
-                </motion.div>
-              )}
-            </StyledSkillCard>
-          ))}
-        </div>
-      </StyledSkillList>
+      <div className="inner">
+        <div className="section-title">About me</div>
+        <p className="intro-text">
+          {educationText}
+          <span className="school-name">{universityName}</span>.
+        </p>
+        <p className="intro-text">{jobText}</p>
+        <p className="intro-text">{additionalText}</p>
+        <div className="resume-button">View My Resume</div>
+        <StyledSkillList>
+          <div className="skill-box-inner">
+            {skillItems.map((item, index) => (
+              <StyledSkillCard key={item.key} color={colorList[index]}>
+                <div className="skill-card-inner">
+                  <div className="icon-wrapper">{item.icon}</div>
+                  <div className="title">{item.title}</div>
+                  <div className="description">{item.description}</div>
+                </div>
+                {index !== 2 && (
+                  <motion.div
+                    className="decoration-dots"
+                    variants={dotParentVariant}
+                    initial="start"
+                    animate="end"
+                  >
+                    {[0, 1, 2, 3, 4].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="dot"
+                        variants={dotVariant}
+                        transition={{ duration: 0.3, yoyo: Infinity }}
+                      ></motion.div>
+                    ))}
+                  </motion.div>
+                )}
+              </StyledSkillCard>
+            ))}
+          </div>
+        </StyledSkillList>
+      </div>
     </StyledAboutSection>
   );
 };

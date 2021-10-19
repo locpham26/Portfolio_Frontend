@@ -26,11 +26,13 @@ const StyledCarousel = styled.div`
     border-radius: var(--border-radius);
     transition: 0.4s;
     &:hover {
-      background-color: #f3e8ff;
+      svg {
+        fill: ${({ theme }) => theme.mainPurple};
+      }
     }
     svg {
       width: 100%;
-      fill: #333333;
+      fill: #1a1c1c;
     }
   }
 `;
