@@ -9,12 +9,15 @@ import { motion } from "framer-motion";
 const StyledHeroSection = styled.section`
   min-height: 100vh;
   width: 100%;
-  margin-bottom: 192px;
+  margin-bottom: 48px;
 `;
 
 const StyledHeroBackground = styled(BackgroundImage)`
   width: 100%;
   height: 350px;
+  @media screen and (${({ theme }) => theme.bp.desktopM}) {
+    height: 600px;
+  }
   .overlay {
     width: 100%;
     height: 100%;
@@ -29,11 +32,7 @@ const StyledHeroDecoration = styled(motion.div)`
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.mainPurple};
-  transition: 0.4s;
-  &:hover {
-    transform: scale(3);
-  }
+  border: 1px solid ${({ theme }) => theme.mainBlue};
 `;
 
 const StyledHeroInfo = styled.div`
@@ -49,11 +48,18 @@ const StyledHeroInfo = styled.div`
       height: 280px;
       border-radius: 50%;
       z-index: 2;
+      @media screen and (${({ theme }) => theme.bp.desktopM}) {
+        height: 400px;
+        width: 400px;
+      }
     }
   }
   .hero-info-wrapper {
     position: relative;
     top: 72px;
+    @media screen and (${({ theme }) => theme.bp.desktopM}) {
+      top: 144px;
+    }
     > * {
       box-sizing: border-box;
       margin-bottom: 12px;
@@ -87,6 +93,49 @@ const StyledHeroInfo = styled.div`
     }
   }
 `;
+
+const parentVariant = {
+  start: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const variants = {
+  start: {
+    scale: 1,
+    opacity: 0,
+  },
+  end: {
+    scale: 1.4,
+    opacity: [0.5, 1, 0],
+    transition: {
+      duration: 1.6,
+      repeat: Infinity,
+      ease: "easeInOut",
+      repeatDelay: 0.2,
+    },
+  },
+};
+
+const variants2 = {
+  start: {
+    scale: 1,
+    opacity: 0,
+  },
+  end: {
+    scale: 1.4,
+    opacity: [0.5, 1, 0],
+    transition: {
+      duration: 0.8,
+      repeat: Infinity,
+      delay: 0.8,
+      repeatDelay: 1,
+      ease: "easeInOut",
+    },
+  },
+};
 
 const Hero = () => {
   const { image } = useStaticQuery(
@@ -129,7 +178,16 @@ const Hero = () => {
             alt="hero"
             className="hero-image"
           />
-          <StyledHeroDecoration />
+          <StyledHeroDecoration
+            variants={variants}
+            initial="start"
+            animate="end"
+          />
+          <StyledHeroDecoration
+            variants={variants2}
+            initial="start"
+            animate="end"
+          />
         </div>
       </StyledHeroInfo>
     </StyledHeroSection>

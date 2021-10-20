@@ -64,6 +64,7 @@ const GlobalStyle = createGlobalStyle`
 
     .section-title {
         color: var(--primary-text);
+        text-align: center;
         font-size: 32px;
         margin-bottom: 32px;
         font-weight: 500;

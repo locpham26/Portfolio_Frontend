@@ -19,8 +19,12 @@ const StyledContactContainer = styled.div`
   align-items: center;
   padding: 40px;
   background-color: #f6f4ff;
-  .animation-wrapper {
-    flex: 0 0 400px;
+  .lottie {
+    width: 400px;
+    @media screen and (${({ theme }) => theme.bp.desktopM}) {
+      width: 720px;
+      height: 400px;
+    }
   }
 `;
 
@@ -92,10 +96,10 @@ const Contacts = () => {
       <div className="section-title">Contact Me</div>
       <StyledContactContainer>
         <Lottie
+          className="lottie"
           play
           loop
           animationData={paperPlaneAnimation}
-          style={{ width: 400 }}
         />
         <StyledContactForm onSubmit={onSubmit}>
           <div style={{ display: "flex", gap: "16px", marginBottom: "32px" }}>

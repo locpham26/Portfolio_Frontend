@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
 import { DesignIcon, MobileIcon, WebIcon } from "../icons";
 import { motion } from "framer-motion";
+import WithView from "../hooks/withView";
 
 const StyledAboutSection = styled.section`
   width: 100%;
@@ -167,54 +168,74 @@ const dotVariant = {
   },
 };
 
+const textVariant = {
+  hidden: {
+    opacity: 0,
+    y: 16,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+    },
+  },
+};
+
 const About = () => {
   const { mainBlue, mainPink, mainPurple } = useContext(ThemeContext);
   const colorList = [mainPurple, mainBlue, mainPink];
   return (
     <StyledAboutSection id="about">
       <div className="inner">
-        <div className="section-title">About me</div>
-        <p className="intro-text">
-          {educationText}
-          <span className="school-name">{universityName}</span>.
-        </p>
-        <p className="intro-text">{jobText}</p>
-        <p className="intro-text">{additionalText}</p>
+        <WithView initial="hidden" variants={textVariant} animation="show">
+          <div className="section-title">About me</div>
+        </WithView>
+        <WithView initial="hidden" variants={textVariant} animation="show">
+          <p className="intro-text">
+            {educationText}
+            <span className="school-name">{universityName}</span>.
+          </p>
+          <p className="intro-text">{jobText}</p>
+          <p className="intro-text">{additionalText}</p>
+        </WithView>
         <div className="resume-button">View My Resume</div>
-        <StyledSkillList>
-          <div className="skill-box-inner">
-            {skillItems.map((item, index) => (
-              <StyledSkillCard key={item.key} color={colorList[index]}>
-                <div className="skill-card-inner">
-                  <div className="icon-wrapper">{item.icon}</div>
-                  <div className="title">{item.title}</div>
-                  <div className="description">{item.description}</div>
-                </div>
-                {index !== 2 && (
-                  <motion.div
-                    className="decoration-dots"
-                    variants={dotParentVariant}
-                    initial="start"
-                    animate="end"
-                  >
-                    {[0, 1, 2, 3, 4].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="dot"
-                        variants={dotVariant}
-                        transition={{
-                          duration: 0.3,
-                          repeat: Infinity,
-                          repeatType: "reverse",
-                        }}
-                      ></motion.div>
-                    ))}
-                  </motion.div>
-                )}
-              </StyledSkillCard>
-            ))}
-          </div>
-        </StyledSkillList>
+        <WithView initial="hidden" variants={textVariant} animation="show">
+          <StyledSkillList>
+            <div className="skill-box-inner">
+              {skillItems.map((item, index) => (
+                <StyledSkillCard key={item.key} color={colorList[index]}>
+                  <div className="skill-card-inner">
+                    <div className="icon-wrapper">{item.icon}</div>
+                    <div className="title">{item.title}</div>
+                    <div className="description">{item.description}</div>
+                  </div>
+                  {index !== 2 && (
+                    <motion.div
+                      className="decoration-dots"
+                      variants={dotParentVariant}
+                      initial="start"
+                      animate="end"
+                    >
+                      {[0, 1, 2, 3, 4].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          className="dot"
+                          variants={dotVariant}
+                          transition={{
+                            duration: 0.3,
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                          }}
+                        ></motion.div>
+                      ))}
+                    </motion.div>
+                  )}
+                </StyledSkillCard>
+              ))}
+            </div>
+          </StyledSkillList>
+        </WithView>
       </div>
     </StyledAboutSection>
   );

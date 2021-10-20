@@ -27,7 +27,7 @@ const StyledSocialList = styled.ul`
       svg {
         width: 16px;
         height: 16px;
-        fill: var(--primary-purple);
+        fill: var(--secondary-text);
       }
     }
     &:hover {

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { graphql, useStaticQuery } from "gatsby";
-// import Lottie from "react-lottie";
 import { firstAnimation, secondAnimation } from "../animation";
 import Lottie from "react-lottie-player";
+import WithView from "../hooks/withView";
 
 const StyledExperienceSection = styled.section`
   display: flex;
@@ -130,24 +130,6 @@ const StyledJobDescription = styled.ul`
   }
 `;
 
-// const firstOptions = {
-//   loop: true,
-//   autoplay: true,
-//   animationData: firstAnimation,
-//   rendererSettings: {
-//     preserveAspectRatio: "xMidYMid slice",
-//   },
-// };
-
-// const secondOptions = {
-//   loop: true,
-//   autoplay: true,
-//   animationData: secondAnimation,
-//   rendererSettings: {
-//     preserveAspectRatio: "xMidYMid slice",
-//   },
-// };
-
 const animationList = [
   <Lottie
     play
@@ -163,6 +145,20 @@ const animationList = [
   />,
 ];
 
+const textVariant = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1.6,
+    },
+  },
+};
+
 const Experience = () => {
   const {
     allStrapiJobs: { nodes: jobs },
@@ -171,39 +167,41 @@ const Experience = () => {
   return (
     <StyledExperienceSection id="experience">
       <div className="section-title">Experience</div>
-      <div className="inner">
-        <StyledTabsContainer>
-          <ul className="tab-list">
-            {jobs.map((item, index) => (
-              <StyledTab
-                key={item.company}
-                onClick={() => setActiveJob(index)}
-                active={index === activeJob}
-              >
-                {item.company}
-              </StyledTab>
-            ))}
-          </ul>
-        </StyledTabsContainer>
-        {jobs.map((item, index) => (
-          <StyledJobWrapper key={index} active={index === activeJob}>
-            <div className="image-wrapper">{animationList[index]}</div>
-            <div className="job-inner">
-              <span className="position">{item.position} </span>
-              <span className="organization-name">@{item.company}</span>
-              <div className="period">{item.duration}</div>
-              <StyledJobDescription>
-                {item.description.map((desc) => (
-                  <li key={desc.id}>
-                    <span className="bullet"></span>
-                    {desc.detail}
-                  </li>
-                ))}
-              </StyledJobDescription>
-            </div>
-          </StyledJobWrapper>
-        ))}
-      </div>
+      <WithView initial="hidden" variants={textVariant} animation="show">
+        <div className="inner">
+          <StyledTabsContainer>
+            <ul className="tab-list">
+              {jobs.map((item, index) => (
+                <StyledTab
+                  key={item.company}
+                  onClick={() => setActiveJob(index)}
+                  active={index === activeJob}
+                >
+                  {item.company}
+                </StyledTab>
+              ))}
+            </ul>
+          </StyledTabsContainer>
+          {jobs.map((item, index) => (
+            <StyledJobWrapper key={index} active={index === activeJob}>
+              <div className="image-wrapper">{animationList[index]}</div>
+              <div className="job-inner">
+                <span className="position">{item.position} </span>
+                <span className="organization-name">@{item.company}</span>
+                <div className="period">{item.duration}</div>
+                <StyledJobDescription>
+                  {item.description.map((desc) => (
+                    <li key={desc.id}>
+                      <span className="bullet"></span>
+                      {desc.detail}
+                    </li>
+                  ))}
+                </StyledJobDescription>
+              </div>
+            </StyledJobWrapper>
+          ))}
+        </div>
+      </WithView>
     </StyledExperienceSection>
   );
 };
