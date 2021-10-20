@@ -2,7 +2,7 @@ import React from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
-const WithView = ({ children, animation, initial, variants }) => {
+const WithView = ({ children, animation, initial, variants, fullWidth }) => {
   const control = useAnimation();
   const { inView, ref } = useInView();
   if (inView) {
@@ -14,7 +14,7 @@ const WithView = ({ children, animation, initial, variants }) => {
       initial={initial}
       variants={variants}
       animate={control}
-      style={{ width: "100%" }}
+      style={{ width: fullWidth ? "100%" : "auto" }}
     >
       {children}
     </motion.div>

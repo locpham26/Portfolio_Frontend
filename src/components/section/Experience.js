@@ -4,6 +4,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import { firstAnimation, secondAnimation } from "../animation";
 import Lottie from "react-lottie-player";
 import WithView from "../hooks/withView";
+import SectionTitle from "../SectionTitle";
 
 const StyledExperienceSection = styled.section`
   display: flex;
@@ -166,8 +167,13 @@ const Experience = () => {
   const [activeJob, setActiveJob] = useState(0);
   return (
     <StyledExperienceSection id="experience">
-      <div className="section-title">Experience</div>
-      <WithView initial="hidden" variants={textVariant} animation="show">
+      <SectionTitle title="Experience" />
+      <WithView
+        initial="hidden"
+        variants={textVariant}
+        animation="show"
+        fullWidth
+      >
         <div className="inner">
           <StyledTabsContainer>
             <ul className="tab-list">

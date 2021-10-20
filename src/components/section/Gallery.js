@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { ChevronRight, ChevronLeft } from "../icons";
+import WithView from "../hooks/withView";
+import SectionTitle from "../SectionTitle";
+import { motion } from "framer-motion";
 
 const StyledGallerySection = styled.section`
   width: 80%;
@@ -103,6 +106,59 @@ export const query = graphql`
   }
 `;
 
+const parentVariants = {
+  hidden: {
+    delayChildren: 0.4,
+  },
+  show: {
+    delayChildren: 0.4,
+  },
+};
+
+const arrowLeftVariants = {
+  hidden: {
+    opacity: 0,
+    x: 24,
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+    },
+  },
+};
+
+const arrowRightVariants = {
+  hidden: {
+    opacity: 0,
+    x: -24,
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+    },
+  },
+};
+
+const variants = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1.6,
+    },
+  },
+};
+
+// const galleryVariant
+
 const Gallery = () => {
   const {
     allStrapiGallery: { nodes: gallery },
@@ -122,25 +178,39 @@ const Gallery = () => {
   };
   return (
     <StyledGallerySection id="other">
-      <div className="section-title">Other Works</div>
-      <StyledCarousel>
-        <button className="icon-wrapper" onClick={getPrev}>
-          <ChevronLeft />
-        </button>
-        {gallery[0].media_list.map((item, index) => (
-          <StyledCarouselItem key={index} active={index === activeSlide}>
-            <GatsbyImage
-              className="carousel-image"
-              image={getImage(item.localFile)}
-              alt={`${index} image`}
-              key={index}
-            />
-          </StyledCarouselItem>
-        ))}
-        <button className="icon-wrapper" onClick={getNext}>
-          <ChevronRight />
-        </button>
-      </StyledCarousel>
+      <SectionTitle title="Other Works" />
+      <WithView initial="hidden" animation="show" variants={variants}>
+        <StyledCarousel>
+          <motion.button
+            // initial="hidden"
+            // animate="show"
+            // variants={arrowLeftVariants}
+            className="icon-wrapper"
+            onClick={getPrev}
+          >
+            <ChevronLeft />
+          </motion.button>
+          {gallery[0].media_list.map((item, index) => (
+            <StyledCarouselItem key={index} active={index === activeSlide}>
+              <GatsbyImage
+                className="carousel-image"
+                image={getImage(item.localFile)}
+                alt={`${index} image`}
+                key={index}
+              />
+            </StyledCarouselItem>
+          ))}
+          <motion.button
+            // initial="hidden"
+            // animate="show"
+            // variants={arrowRightVariants}
+            className="icon-wrapper"
+            onClick={getNext}
+          >
+            <ChevronRight />
+          </motion.button>
+        </StyledCarousel>
+      </WithView>
       <StyledDots>
         <ul>
           {gallery[0].media_list.map((item, index) => (

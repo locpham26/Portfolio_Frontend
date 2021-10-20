@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Lottie from "react-lottie-player";
 import { paperPlaneAnimation } from "../animation";
+import SectionTitle from "../SectionTitle";
+import WithView from "../hooks/withView";
 
 const StyledContactSection = styled.section`
   width: 80%;
@@ -65,6 +67,20 @@ const StyledContactForm = styled.form`
   }
 `;
 
+const variants = {
+  hidden: {
+    opacity: 0,
+    y: 16,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+    },
+  },
+};
+
 const Contacts = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -93,69 +109,71 @@ const Contacts = () => {
   };
   return (
     <StyledContactSection>
-      <div className="section-title">Contact Me</div>
-      <StyledContactContainer>
-        <Lottie
-          className="lottie"
-          play
-          loop
-          animationData={paperPlaneAnimation}
-        />
-        <StyledContactForm onSubmit={onSubmit}>
-          <div style={{ display: "flex", gap: "16px", marginBottom: "32px" }}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                flex: "1 1 50%",
-              }}
-            >
-              <label className="input-label" htmlFor="email">
-                Email
-              </label>
-              <input
-                className="input-field"
-                id="email"
-                type="email"
-                name="email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <label className="input-label" htmlFor="name">
-                Name
-              </label>
-              <input
-                className="input-field"
-                id="name"
-                type="text"
-                name="name"
-                onChange={(e) => setName(e.target.value)}
-              />
+      <SectionTitle title="Contact Me" />
+      <WithView initial="hidden" animation="show" variants={variants} fullWidth>
+        <StyledContactContainer>
+          <Lottie
+            className="lottie"
+            play
+            loop
+            animationData={paperPlaneAnimation}
+          />
+          <StyledContactForm onSubmit={onSubmit}>
+            <div style={{ display: "flex", gap: "16px", marginBottom: "32px" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  flex: "1 1 50%",
+                }}
+              >
+                <label className="input-label" htmlFor="email">
+                  Email
+                </label>
+                <input
+                  className="input-field"
+                  id="email"
+                  type="email"
+                  name="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <label className="input-label" htmlFor="name">
+                  Name
+                </label>
+                <input
+                  className="input-field"
+                  id="name"
+                  type="text"
+                  name="name"
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  flex: "1 1 50%",
+                }}
+              >
+                <label className="input-label" htmlFor="message">
+                  Message
+                </label>
+                <textarea
+                  className="input-field input-area"
+                  id="message"
+                  type="text"
+                  name="message"
+                  rows="4"
+                  onChange={(e) => setMessage(e.target.value)}
+                />
+              </div>
             </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                flex: "1 1 50%",
-              }}
-            >
-              <label className="input-label" htmlFor="message">
-                Message
-              </label>
-              <textarea
-                className="input-field input-area"
-                id="message"
-                type="text"
-                name="message"
-                rows="4"
-                onChange={(e) => setMessage(e.target.value)}
-              />
-            </div>
-          </div>
-          <button type="submit" className="submit-button">
-            Send
-          </button>
-        </StyledContactForm>
-      </StyledContactContainer>
+            <button type="submit" className="submit-button">
+              Send
+            </button>
+          </StyledContactForm>
+        </StyledContactContainer>
+      </WithView>
     </StyledContactSection>
   );
 };

@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import styled, { ThemeContext } from "styled-components";
 import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
+import WithView from "../hooks/withView";
+import SectionTitle from "../SectionTitle";
 
 const ProjectSection = styled.section`
   display: flex;
@@ -161,46 +163,67 @@ const StyledProjectCard = styled.li`
   }
 `;
 
+const projectVariants = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+    },
+  },
+};
+
 const Projects = () => {
   const { mainPurple, mainBlue, mainPink } = useContext(ThemeContext);
   const colorList = [mainPurple, mainBlue, mainPink];
   return (
     <ProjectSection id="projects">
-      <div className="section-title">Projects</div>
+      <SectionTitle title="Projects" />
       <StyledProjectList>
         {[0, 1, 2].map((_, index) => (
-          <StyledProjectItem key={index} isOdd={(index + 1) % 2 !== 0}>
-            <div className="item-inner">
-              <StyledProjectImage color={colorList[index]}>
-                <div className="image-inner">
-                  <StaticImage
-                    className="project-item-image"
-                    src="../../images/background.jpg"
-                    alt="bg"
-                  />
-                </div>
-              </StyledProjectImage>
-              <StyledProjectInfo
-                isOdd={(index + 1) % 2 !== 0}
-                decorationColor={colorList[index]}
-              >
-                <div className="info-inner">
-                  <div className="decoration"></div>
-                  <div className="project-item-name">Werewolf Board Game</div>
-                  <div className="project-item-description">
-                    A simple online board game that allowed users to play and
-                    chat simultaneously. A simple online board game that allowed
-                    users to play and chat simultaneously. A simple online board
-                    game that allowed users to play and chat simultaneously
+          <WithView
+            initial="hidden"
+            animation="show"
+            variants={projectVariants}
+          >
+            <StyledProjectItem key={index} isOdd={(index + 1) % 2 !== 0}>
+              <div className="item-inner">
+                <StyledProjectImage color={colorList[index]}>
+                  <div className="image-inner">
+                    <StaticImage
+                      className="project-item-image"
+                      src="../../images/background.jpg"
+                      alt="bg"
+                    />
                   </div>
-                  <ul className="project-item-tool-list">
-                    <li>Vue</li>
-                    <li>Django</li>
-                  </ul>
-                </div>
-              </StyledProjectInfo>
-            </div>
-          </StyledProjectItem>
+                </StyledProjectImage>
+                <StyledProjectInfo
+                  isOdd={(index + 1) % 2 !== 0}
+                  decorationColor={colorList[index]}
+                >
+                  <div className="info-inner">
+                    <div className="decoration"></div>
+                    <div className="project-item-name">Werewolf Board Game</div>
+                    <div className="project-item-description">
+                      A simple online board game that allowed users to play and
+                      chat simultaneously. A simple online board game that
+                      allowed users to play and chat simultaneously. A simple
+                      online board game that allowed users to play and chat
+                      simultaneously
+                    </div>
+                    <ul className="project-item-tool-list">
+                      <li>Vue</li>
+                      <li>Django</li>
+                    </ul>
+                  </div>
+                </StyledProjectInfo>
+              </div>
+            </StyledProjectItem>
+          </WithView>
         ))}
       </StyledProjectList>
       <div className="section-title">Other Projects</div>

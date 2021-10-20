@@ -3,6 +3,7 @@ import styled, { ThemeContext } from "styled-components";
 import { DesignIcon, MobileIcon, WebIcon } from "../icons";
 import { motion } from "framer-motion";
 import WithView from "../hooks/withView";
+import SectionTitle from "../SectionTitle";
 
 const StyledAboutSection = styled.section`
   width: 100%;
@@ -188,9 +189,7 @@ const About = () => {
   return (
     <StyledAboutSection id="about">
       <div className="inner">
-        <WithView initial="hidden" variants={textVariant} animation="show">
-          <div className="section-title">About me</div>
-        </WithView>
+        <SectionTitle title="About Me" />
         <WithView initial="hidden" variants={textVariant} animation="show">
           <p className="intro-text">
             {educationText}
