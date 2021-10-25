@@ -21,21 +21,18 @@ const StyledHeader = styled(motion.header)`
     }
   }
   .resume-button {
-    color: var(--primary-purple);
-    border: 1px solid var(--primary-purple);
-    border-radius: 40px;
-    cursor: pointer;
-    padding: 8px 16px;
+    padding: 16px 24px;
+    border: 1px solid ${({ theme }) => theme.mainTeal};
+    color: ${({ theme }) => theme.mainTeal};
+    background-color: transparent;
+    font-size: 16px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    transition: 0.4s;
-    &:hover {
-      color: white;
-      border: 1px solid ${({ theme }) => theme.mainPurple};
-      box-shadow: inset 0 0 0 2em ${({ theme }) => theme.mainPurple};
-      transform: translateY(-4px);
-    }
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    margin: 32px 0px;
+    border-radius: var(--border-radius);
   }
 `;
 
@@ -54,7 +51,7 @@ const StyledLinkWrapper = styled(motion.div)`
   position: relative;
   a {
     text-decoration: none;
-    color: var(--primary-text);
+    color: ${({ theme }) => theme.mainLightText};
     font-weight: 500;
   }
   .decoration-item {
@@ -177,7 +174,7 @@ const Nav = ({ location }) => {
           </StyledLinkWrapper>
         ))}
       </StyledNavList>
-      <div className="resume-button">Resume</div>
+      <button className="resume-button">Resume</button>
     </StyledHeader>
   );
 };

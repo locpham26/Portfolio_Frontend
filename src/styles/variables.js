@@ -7,7 +7,7 @@ const variables = css`
     --secondary-purple: #ff00ff;
     --primary-text: #1c1a1a;
     --secondary-text: #60626e;
-    --border-radius: 8px;
+    --border-radius: 4px;
     --spacing: 8px;
     --nav-height: 64px;
     --font-sans: "Noto Sans Display", "Inter", "San Francisco", "SF Pro Text",
