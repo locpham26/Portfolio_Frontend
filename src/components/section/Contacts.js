@@ -8,9 +8,6 @@ import WithView from "../hooks/withView";
 const StyledContactSection = styled.section`
   width: 80%;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin-bottom: 96px;
 `;
 
@@ -20,7 +17,7 @@ const StyledContactContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 40px;
-  background-color: #f6f4ff;
+  background-color: ${({ theme }) => theme.mainDark};
   .lottie {
     width: 400px;
     @media screen and (${({ theme }) => theme.bp.desktopM}) {
@@ -35,7 +32,7 @@ const StyledContactForm = styled.form`
   display: flex;
   flex-direction: column;
   .input-label {
-    color: var(--primary-text);
+    color: ${({ theme }) => theme.mainLightText};
     font-weight: 400;
     font-size: 16px;
     font-family: var(--font-sans);
@@ -47,22 +44,26 @@ const StyledContactForm = styled.form`
     border-radius: var(--border-radius);
     margin-bottom: 16px;
     padding: 8px 16px;
+    background-color: white;
     border: 1px solid #dddeee;
+    &:focus {
+      border-color: ${({ theme }) => theme.mainTeal};
+    }
   }
   .input-area {
     resize: none;
-    font-family: var(--font-sans);
+    font-family: var(--font-sans) !important;
     height: 100% !important;
   }
   .submit-button {
     padding: 12px 24px;
     border-radius: var(--border-radius);
-    background-color: ${({ theme }) => theme.mainPurple};
-    color: white;
+    background-color: transparent;
+    color: ${({ theme }) => theme.mainTeal};
     font-size: 20px;
     font-weight: 500;
     outline: none;
-    border: none;
+    border: 1px solid ${({ theme }) => theme.mainTeal};
     cursor: pointer;
   }
 `;
@@ -108,8 +109,11 @@ const Contacts = () => {
     }
   };
   return (
-    <StyledContactSection>
-      <SectionTitle title="Contact Me" />
+    <StyledContactSection id="contacts">
+      <SectionTitle
+        title="5. Contact Me"
+        subtitle="If you find my profile interesting, please leave me a message"
+      />
       <WithView initial="hidden" animation="show" variants={variants} fullWidth>
         <StyledContactContainer>
           <Lottie

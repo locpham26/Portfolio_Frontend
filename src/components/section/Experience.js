@@ -1,107 +1,48 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { graphql, useStaticQuery } from "gatsby";
-import { firstAnimation, secondAnimation } from "../animation";
-import Lottie from "react-lottie-player";
 import WithView from "../hooks/withView";
 import SectionTitle from "../SectionTitle";
 
 const StyledExperienceSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 80%;
-  margin: 0 auto;
-  margin-bottom: 192px;
+  background-color: ${({ theme }) => theme.mainDark};
+  margin-bottom: 128px;
   .inner {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 48px;
-  }
-`;
-
-const StyledTabsContainer = styled.div`
-  align-self: flex-start;
-  width: 100%;
-  margin: 24px 0px;
-  .tab-list {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    &:before {
-      content: "";
-      display: block;
-      width: 100px;
-      height: 2px;
-      border-top: 2px dashed ${({ theme }) => theme.mainPurple};
-    }
-    &:after {
-      content: "";
-      flex: 1 1 auto;
-      display: block;
-      max-width: 100%;
-      height: 2px;
-      border-top: 2px dashed ${({ theme }) => theme.mainPurple};
+    width: 80%;
+    margin: 0 auto;
+    padding: 64px 0px 128px 0px;
+    .jobs-container {
+      display: flex;
+      gap: 48px;
     }
   }
-`;
-
-const StyledTab = styled.li`
-  &:hover {
-    color: ${({ theme }) => theme.mainPurple};
-    background-color: #f6f4ff;
-    transform: translateY(-4px);
-  }
-  padding: 12px 24px;
-  border-radius: 32px;
-  cursor: pointer;
-  color: ${({ theme, active }) =>
-    active ? "white" : theme.mainPurple} !important;
-  background-color: ${({ active, theme }) =>
-    active && theme.mainPurple} !important;
-  border: 1px solid ${({ theme }) => theme.mainPurple};
-  transition: 0.4s;
-
-  font-weight: 500;
-  position: relative;
 `;
 
 const StyledJobWrapper = styled.div`
-  display: ${({ active }) => (active ? "flex" : "none")};
   width: 100%;
-  align-items: flex-end;
+  position: relative;
+  top: ${({ isEven }) => isEven && "48px"};
   .job-inner {
-    flex: 1 1 auto;
     border-radius: var(--border-radius);
-    border: 1px solid #dddeee;
+    border: 1px solid ${({ theme }) => theme.mainTeal};
     min-height: 400px;
     padding: 40px;
-    &:hover {
-      box-shadow: 4px 4px 10px rgb(0 0 0 / 16%);
-    }
     .organization-name {
-      color: var(--primary-purple);
+      color: ${({ theme }) => theme.mainTeal};
       font-weight: 500;
       font-size: 20px;
     }
     .position {
-      color: var(--primary-text);
+      color: ${({ theme }) => theme.mainLightText};
       font-weight: 500;
       font-size: 20px;
       margin-bottom: 8px;
     }
     .period {
-      color: var(--secondary-text);
+      color: ${({ theme }) => theme.secondLightText};
       font-size: 18px;
       margin-bottom: 24px;
     }
-  }
-  .image-wrapper {
-    flex: 0 0 auto;
   }
 `;
 
@@ -115,36 +56,19 @@ const StyledJobDescription = styled.ul`
     grid-template-columns: 24px 1fr;
     gap: 8px;
     font-size: 16px;
-    color: var(--primary-text);
+    color: ${({ theme }) => theme.mainLightText};
     box-sizing: border-box;
     margin-bottom: 16px;
-    .bullet {
+    &::before {
+      content: ">>";
       width: 8px;
       height: 8px;
       display: inline-block;
-      border-radius: 50%;
-      background-color: ${({ theme }) => theme.mainBlue};
       position: relative;
-      top: 8px;
-      left: 4px;
+      color: ${({ theme }) => theme.mainTeal};
     }
   }
 `;
-
-const animationList = [
-  <Lottie
-    play
-    loop
-    animationData={firstAnimation}
-    style={{ width: 560, height: 400 }}
-  />,
-  <Lottie
-    play
-    loop
-    animationData={secondAnimation}
-    style={{ width: 560, height: 400 }}
-  />,
-];
 
 const textVariant = {
   hidden: {
@@ -164,50 +88,31 @@ const Experience = () => {
   const {
     allStrapiJobs: { nodes: jobs },
   } = useStaticQuery(query);
-  const [activeJob, setActiveJob] = useState(0);
+
   return (
     <StyledExperienceSection id="experience">
-      <SectionTitle title="Experience" />
-      <WithView
-        initial="hidden"
-        variants={textVariant}
-        animation="show"
-        fullWidth
-      >
-        <div className="inner">
-          <StyledTabsContainer>
-            <ul className="tab-list">
-              {jobs.map((item, index) => (
-                <StyledTab
-                  key={item.company}
-                  onClick={() => setActiveJob(index)}
-                  active={index === activeJob}
-                >
-                  {item.company}
-                </StyledTab>
-              ))}
-            </ul>
-          </StyledTabsContainer>
+      <div className="inner">
+        <SectionTitle
+          title="2. Experience"
+          subtitle="A list of where I worked"
+        />
+        <div className="jobs-container">
           {jobs.map((item, index) => (
-            <StyledJobWrapper key={index} active={index === activeJob}>
-              <div className="image-wrapper">{animationList[index]}</div>
+            <StyledJobWrapper key={index} isEven={(index + 1) % 2 === 0}>
               <div className="job-inner">
                 <span className="position">{item.position} </span>
                 <span className="organization-name">@{item.company}</span>
                 <div className="period">{item.duration}</div>
                 <StyledJobDescription>
                   {item.description.map((desc) => (
-                    <li key={desc.id}>
-                      <span className="bullet"></span>
-                      {desc.detail}
-                    </li>
+                    <li key={desc.id}>{desc.detail}</li>
                   ))}
                 </StyledJobDescription>
               </div>
             </StyledJobWrapper>
           ))}
         </div>
-      </WithView>
+      </div>
     </StyledExperienceSection>
   );
 };

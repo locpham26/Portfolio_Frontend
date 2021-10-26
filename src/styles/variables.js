@@ -10,8 +10,9 @@ const variables = css`
     --border-radius: 4px;
     --spacing: 8px;
     --nav-height: 64px;
-    --font-sans: "Noto Sans Display", "Inter", "San Francisco", "SF Pro Text",
+    --font-sans: "Source Sans Pro", "Inter", "San Francisco", "SF Pro Text",
       -apple-system, system-ui, sans-serif;
+    --font-sans-serif: "PT Serif";
   }
 `;
 

@@ -12,9 +12,6 @@ const StyledGallerySection = styled.section`
   margin: 0 auto;
   box-sizing: border-box;
   margin-bottom: 96px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
 
 const StyledCarousel = styled.div`
@@ -178,7 +175,10 @@ const Gallery = () => {
   };
   return (
     <StyledGallerySection id="other">
-      <SectionTitle title="Other Works" />
+      <SectionTitle
+        title="5. Other Works"
+        subtitle="This is the logos and posters I designed"
+      />
       <WithView initial="hidden" animation="show" variants={variants}>
         <StyledCarousel>
           <motion.button

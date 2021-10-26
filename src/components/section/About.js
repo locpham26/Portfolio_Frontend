@@ -7,97 +7,61 @@ import SectionTitle from "../SectionTitle";
 
 const StyledAboutSection = styled.section`
   width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 128px;
   .inner {
     width: 80%;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-sizing: border-box;
-    margin-bottom: 192px;
-    .intro-text {
-      color: var(--secondary-text);
-      font-size: 16px;
-      text-align: center;
-      .school-name {
-        color: var(--primary-purple);
-      }
+    .inner-info {
+      display: flex;
+      gap: 48px;
     }
-    .resume-button {
-      border: 1px solid var(--primary-purple);
-      color: var(--primary-purple);
-      border-radius: 32px;
-      font-weight: 400;
-      font-size: 18px;
-      width: fit-content;
-      padding: 12px 24px;
-      background-color: white;
-      cursor: pointer;
-      margin-top: 24px;
-      transition: 0.4s;
-      &:hover,
-      &:focus {
-        color: white;
-        border: 1px solid ${({ theme }) => theme.mainPurple};
-        box-shadow: inset 0 0 0 2em ${({ theme }) => theme.mainPurple};
-        transform: translateY(-4px);
-      }
-    }
+  }
+`;
+
+const StyledAboutInfo = styled.div`
+  flex: 0 0 400px;
+  .info-text {
+    font-size: 16px;
+    color: ${({ theme }) => theme.mainDark};
+    margin-bottom: 24px;
   }
 `;
 
 const StyledSkillList = styled.div`
-  width: 100%;
+  /* flex: 1 1 auto; */
   box-sizing: border-box;
-  margin-top: 32px;
   .skill-box-inner {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(26%, 1fr));
-    grid-gap: 64px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 48px;
   }
 `;
 
 const StyledSkillCard = styled.div`
-  position: relative;
   border-radius: var(--border-radius);
   border: 1px solid #dddeee;
   background-color: white;
+  max-width: calc(50% - 48px);
   &:hover {
     box-shadow: 4px 4px 10px rgb(0 0 0 / 16%);
-  }
-  .decoration-dots {
-    position: absolute;
-    left: 100%;
-    top: 128px;
-    width: fit-content;
-    overflow: hidden;
-    white-space: nowrap;
-    line-height: 0;
-    .dot {
-      display: inline-block;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background-color: ${({ color }) => color};
-      margin: 8px 4px;
-    }
   }
   .skill-card-inner {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: transparent;
-    padding: 40px;
+    padding: 24px;
     border-radius: var(--border-radius);
     .icon-wrapper {
-      width: 64px;
-      height: 64px;
-      background-color: ${({ color }) => color};
-      border-radius: 12px;
+      width: 48px;
+      height: 48px;
+      background-color: ${({ theme }) => theme.mainPurple};
+      border-radius: var(--border-radius);
       ${({ theme }) => theme.mixins.flexCenter};
       box-sizing: border-box;
-      margin-bottom: 40px;
+      margin-bottom: 24px;
     }
     .title {
       font-weight: 500;
@@ -115,13 +79,6 @@ const StyledSkillCard = styled.div`
     }
   }
 `;
-
-const educationText =
-  "I am currently a senior majoring in Computer Science at ";
-const universityName = "Texas Christian University";
-const jobText =
-  "I am a full-stack developer. Creating web apps and mobile apps is my passion.";
-const additionalText = "I can also work on UI and UX design.";
 
 const skillItems = [
   {
@@ -147,28 +104,6 @@ const skillItems = [
   },
 ];
 
-const dotParentVariant = {
-  start: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-  end: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const dotVariant = {
-  start: {
-    y: 0,
-  },
-  end: {
-    y: 8,
-  },
-};
-
 const textVariant = {
   hidden: {
     opacity: 0,
@@ -184,57 +119,42 @@ const textVariant = {
 };
 
 const About = () => {
-  const { mainBlue, mainPink, mainPurple } = useContext(ThemeContext);
-  const colorList = [mainPurple, mainBlue, mainPink];
   return (
     <StyledAboutSection id="about">
       <div className="inner">
-        <SectionTitle title="About Me" />
-        <WithView initial="hidden" variants={textVariant} animation="show">
-          <p className="intro-text">
-            {educationText}
-            <span className="school-name">{universityName}</span>.
-          </p>
-          <p className="intro-text">{jobText}</p>
-          <p className="intro-text">{additionalText}</p>
-        </WithView>
-        <div className="resume-button">View My Resume</div>
-        <WithView initial="hidden" variants={textVariant} animation="show">
+        <SectionTitle
+          title="1. About Me"
+          subtitle="Some information about myself"
+        />
+        <div className="inner-info">
+          <StyledAboutInfo>
+            <WithView initial="hidden" variants={textVariant} animation="show">
+              <p className="info-text">
+                I am currently a senior majoring in Computer Science at Texas
+                Christian University. I expect to graduate on May 2022.{" "}
+              </p>
+              <p className="info-text">
+                Creating beautiful and functional software is my passion. I have
+                experience working
+              </p>
+            </WithView>
+          </StyledAboutInfo>
           <StyledSkillList>
+            {/* <WithView initial="hidden" variants={textVariant} animation="show"> */}
             <div className="skill-box-inner">
               {skillItems.map((item, index) => (
-                <StyledSkillCard key={item.key} color={colorList[index]}>
+                <StyledSkillCard key={item.key}>
                   <div className="skill-card-inner">
                     <div className="icon-wrapper">{item.icon}</div>
                     <div className="title">{item.title}</div>
                     <div className="description">{item.description}</div>
                   </div>
-                  {index !== 2 && (
-                    <motion.div
-                      className="decoration-dots"
-                      variants={dotParentVariant}
-                      initial="start"
-                      animate="end"
-                    >
-                      {[0, 1, 2, 3, 4].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className="dot"
-                          variants={dotVariant}
-                          transition={{
-                            duration: 0.3,
-                            repeat: Infinity,
-                            repeatType: "reverse",
-                          }}
-                        ></motion.div>
-                      ))}
-                    </motion.div>
-                  )}
                 </StyledSkillCard>
               ))}
             </div>
+            {/* </WithView> */}
           </StyledSkillList>
-        </WithView>
+        </div>
       </div>
     </StyledAboutSection>
   );

@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 const StyledHeroSection = styled.section`
   height: 100vh;
   width: 100%;
-  margin-bottom: 48px;
+  margin-bottom: 96px;
   background-color: ${({ theme }) => theme.mainDark};
   .inner {
     height: 100%;
@@ -20,26 +20,39 @@ const StyledHeroSection = styled.section`
     justify-content: space-around;
     position: relative;
     .hero-image-wrapper {
+      flex: 0 0 280px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      position: relative;
       .hero-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+      .hero-animation {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        svg {
+          width: 560px;
+          height: 560px;
+        }
       }
     }
-    .hero-animation {
-      /* position: absolute; */
-      /* z-index: -1; */
-      /* left: 35%; */
-    }
+
     .hero-info-wrapper {
       .hero-info-greet {
         color: ${({ theme }) => theme.mainTeal};
-        font-family: "Playfair Display";
-        font-weight: 600;
+        font-family: var(--font-sans-serif);
+        font-weight: 500;
         font-size: 18px;
       }
       .hero-info-name {
         font-weight: 600;
         font-size: 48px;
         color: ${({ theme }) => theme.mainLightText};
-        font-family: "Playfair Display";
+        font-family: var(--font-sans-serif);
         margin: 16px 0px;
       }
       .hero-info-desc {
@@ -80,16 +93,17 @@ const Hero = () => {
           </p>
           <button className="resume-button">View my resume</button>
         </div>
-        <div className="hero-animation">
-          <BackgroundAnimation />
-        </div>
-        {/* <div className="hero-image-wrapper">
+
+        <div className="hero-image-wrapper">
+          <div className="hero-animation">
+            <BackgroundAnimation />
+          </div>
           <StaticImage
-            src="../../images/loc.png"
+            src="../../images/hero.jpeg"
             alt="hero"
             className="hero-image"
           />
-        </div> */}
+        </div>
       </div>
     </StyledHeroSection>
   );

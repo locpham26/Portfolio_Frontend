@@ -6,6 +6,7 @@ import { Logo } from "./icons";
 
 const StyledHeader = styled(motion.header)`
   ${({ theme }) => theme.mixins.flexBetween};
+  background-color: ${({ theme }) => theme.mainDark};
   height: var(--nav-height);
   position: fixed;
   top: 0;
@@ -21,7 +22,7 @@ const StyledHeader = styled(motion.header)`
     }
   }
   .resume-button {
-    padding: 16px 24px;
+    padding: 8px 16px;
     border: 1px solid ${({ theme }) => theme.mainTeal};
     color: ${({ theme }) => theme.mainTeal};
     background-color: transparent;
@@ -31,7 +32,6 @@ const StyledHeader = styled(motion.header)`
     justify-content: center;
     outline: none;
     cursor: pointer;
-    margin: 32px 0px;
     border-radius: var(--border-radius);
   }
 `;
@@ -83,7 +83,7 @@ const StyledLinkWrapper = styled(motion.div)`
   }
   &:hover {
     a {
-      color: var(--primary-purple);
+      color: ${({ theme }) => theme.mainTeal};
       transition: color 0.4s;
     }
   }
@@ -91,7 +91,7 @@ const StyledLinkWrapper = styled(motion.div)`
 
 const StyledLinkDecoration = styled(motion.div)`
   height: 2px;
-  background-color: var(--primary-purple);
+  background-color: ${({ theme }) => theme.mainTeal};
   position: absolute;
   bottom: 24px;
 `;
@@ -149,7 +149,6 @@ const Nav = ({ location }) => {
       animate={hidden ? "hidden" : "visible"}
       transition={{ ease: [0.1, 0.25, 0.3, 1], duration: 0.5 }}
       style={{
-        backgroundColor: overHero ? "#FFFFFF" : "transparent",
         boxShadow:
           overHero &&
           "0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)",

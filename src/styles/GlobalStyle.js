@@ -22,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
         overflow-x: hidden;
         line-height: 1.4;
         background-color: #fffffe;
-        font-family: "Source Sans Pro";
+        font-family: var(--font-sans);
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         /* scroll-behavior: smooth; */

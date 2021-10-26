@@ -5,12 +5,18 @@ import WithView from "../hooks/withView";
 import SectionTitle from "../SectionTitle";
 
 const ProjectSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 80%;
   margin: 0 auto;
   margin-bottom: 192px;
+  .other-title {
+    color: ${({ theme }) => theme.mainTeal};
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 32px;
+    font-family: var(--font-sans-serif);
+    text-align: center;
+    letter-spacing: 0.08rem;
+  }
 `;
 
 const StyledProjectList = styled.ul`
@@ -47,7 +53,7 @@ const StyledProjectImage = styled.div`
       width: 100%;
       height: 100%;
       position: absolute;
-      background-color: ${({ color }) => color};
+      background-color: ${({ theme }) => theme.mainPurple};
       opacity: 0.13;
       z-index: 1;
     }
@@ -81,10 +87,10 @@ const StyledProjectInfo = styled.div`
       top: 18px;
       left: ${({ isOdd }) => (isOdd ? "18px" : "-18px")};
       transform: ${({ isOdd }) => (isOdd ? "rotate(3deg)" : "rotate(-3deg)")};
-      background-color: ${({ decorationColor }) => decorationColor};
+      background-color: ${({ theme }) => theme.mainPurple};
     }
     .project-item-name {
-      color: ${({ decorationColor }) => decorationColor};
+      color: ${({ theme }) => theme.mainPurple};
       font-size: 20px;
       font-weight: 500;
       margin-bottom: 16px;
@@ -178,11 +184,12 @@ const projectVariants = {
 };
 
 const Projects = () => {
-  const { mainPurple, mainBlue, mainPink } = useContext(ThemeContext);
-  const colorList = [mainPurple, mainBlue, mainPink];
   return (
     <ProjectSection id="projects">
-      <SectionTitle title="Projects" />
+      <SectionTitle
+        title="3. Projects"
+        subtitle="The projects I have been working on"
+      />
       <StyledProjectList>
         {[0, 1, 2].map((_, index) => (
           <WithView
@@ -192,7 +199,7 @@ const Projects = () => {
           >
             <StyledProjectItem key={index} isOdd={(index + 1) % 2 !== 0}>
               <div className="item-inner">
-                <StyledProjectImage color={colorList[index]}>
+                <StyledProjectImage>
                   <div className="image-inner">
                     <StaticImage
                       className="project-item-image"
@@ -201,10 +208,7 @@ const Projects = () => {
                     />
                   </div>
                 </StyledProjectImage>
-                <StyledProjectInfo
-                  isOdd={(index + 1) % 2 !== 0}
-                  decorationColor={colorList[index]}
-                >
+                <StyledProjectInfo isOdd={(index + 1) % 2 !== 0}>
                   <div className="info-inner">
                     <div className="decoration"></div>
                     <div className="project-item-name">Werewolf Board Game</div>
@@ -226,7 +230,7 @@ const Projects = () => {
           </WithView>
         ))}
       </StyledProjectList>
-      <div className="section-title">Other Projects</div>
+      <h3 className="other-title">Other Projects</h3>
       <StyledOtherContainer>
         <ul className="projects-grid">
           <StyledProjectCard>

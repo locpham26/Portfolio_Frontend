@@ -27,11 +27,11 @@ const StyledSocialList = styled.ul`
       svg {
         width: 16px;
         height: 16px;
-        fill: var(--secondary-text);
+        fill: ${({ theme }) => theme.mainTeal};
       }
     }
     &:hover {
-      background-color: ${({ theme }) => theme.mainPink};
+      background-color: ${({ theme }) => theme.mainTeal};
       a {
         svg {
           fill: #ffffff;
