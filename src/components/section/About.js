@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import styled, { ThemeContext } from "styled-components";
+import React from "react";
+import styled from "styled-components";
 import { DesignIcon, MobileIcon, WebIcon } from "../icons";
 import { motion } from "framer-motion";
 import WithView from "../hooks/withView";
@@ -85,21 +85,21 @@ const skillItems = [
     key: "web",
     title: "Web Development",
     description:
-      "Deep v succulents biodiesel godard man bun, master cleanse slow-carb affogato yr cronut seitan. Man braid glossier banh mi, deep v salvia lo-fi jianbing forage air plant fam.",
+      "Developing fast and artistically pleasing web applications has been a passion for me.",
     icon: <WebIcon />,
   },
   {
     key: "mobile",
     title: "Mobile Development",
     description:
-      "Deep v succulents biodiesel godard man bun, master cleanse slow-carb affogato yr cronut seitan. Man braid glossier banh mi, deep v salvia lo-fi jianbing forage air plant fam.",
+      "Creating user-friendly and cross-platform mobile applications is my recent work.",
     icon: <MobileIcon />,
   },
   {
     key: "design",
     title: "UI UX Design",
     description:
-      "Deep v succulents biodiesel godard man bun, master cleanse slow-carb affogato yr cronut seitan. Man braid glossier banh mi, deep v salvia lo-fi jianbing forage air plant fam.",
+      "Driven by the desire to provide the best experience for users, I work meticulously on UI/UX design.",
     icon: <DesignIcon />,
   },
 ];
@@ -134,8 +134,17 @@ const About = () => {
                 Christian University. I expect to graduate on May 2022.{" "}
               </p>
               <p className="info-text">
-                Creating beautiful and functional software is my passion. I have
-                experience working
+                My interest in software development started when I built an
+                online boardgame with a group of friends. It was a valuable
+                experience that taught me a lot about HTML, CSS, and Vue.js.
+                Then, I dived deeply in learning web development, mobile
+                development, and UI/UX design so that I can deliver asthetic and
+                optimized applications.
+              </p>
+              <p className="info-text">
+                I've had the opportunities to work at an outsourcing company, a
+                product cooperation, and a start-up. Currently, I'm looking for
+                any available positions in software development.
               </p>
             </WithView>
           </StyledAboutInfo>

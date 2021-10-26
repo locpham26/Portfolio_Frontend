@@ -20,15 +20,24 @@ const StyledHeroSection = styled.section`
     justify-content: space-around;
     position: relative;
     .hero-image-wrapper {
-      flex: 0 0 280px;
+      /* flex: 0 0 280px; */
       width: 280px;
       height: 280px;
       border-radius: 50%;
       position: relative;
+      .hero-image-decoration {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 1px solid ${({ theme }) => theme.mainTeal};
+      }
       .hero-image {
         width: 100%;
         height: 100%;
         border-radius: 50%;
+        position: relative;
       }
       .hero-animation {
         position: absolute;
@@ -42,6 +51,7 @@ const StyledHeroSection = styled.section`
     }
 
     .hero-info-wrapper {
+      max-width: 60%;
       .hero-info-greet {
         color: ${({ theme }) => theme.mainTeal};
         font-family: var(--font-sans-serif);
@@ -69,14 +79,40 @@ const StyledHeroSection = styled.section`
         display: flex;
         align-items: center;
         justify-content: center;
-        outline: none;
         cursor: pointer;
         margin: 32px 0px;
         border-radius: var(--border-radius);
+        box-shadow: inset 0 0 20px rgba(27, 232, 224, 0);
+        outline: 1px solid;
+        outline-color: rgba(27, 232, 224, 0.5);
+        outline-offset: 0px;
+        text-shadow: none;
+        transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+        &:hover {
+          box-shadow: inset 0 0 20px rgba(27, 232, 224, 0.5),
+            0 0 20px rgba(27, 232, 224, 0.2);
+          outline-color: rgba(27, 232, 224, 0);
+          outline-offset: 15px;
+          text-shadow: 1px 1px 2px #427388;
+        }
       }
     }
   }
 `;
+
+const imageDecorationVariants = {
+  rest: {
+    opacity: 0,
+    scale: 1,
+  },
+  hover: {
+    opacity: [1, 0.5, 0],
+    scale: 1.5,
+    transition: {
+      duration: 0.8,
+    },
+  },
+};
 
 const Hero = () => {
   return (
@@ -88,13 +124,23 @@ const Hero = () => {
           </h1>
           <h2 className="hero-info-name">Loc Pham.</h2>
           <p className="hero-info-desc">
-            I am a software engineer who builds user-friendly websites and
-            mobile apps.
+            I am a software engineer who builds user-friendly and functional
+            software. I care deeply about building applications that are usable
+            and pleasant for the most number of users possible.
           </p>
           <button className="resume-button">View my resume</button>
         </div>
 
-        <div className="hero-image-wrapper">
+        <motion.div
+          className="hero-image-wrapper"
+          initial="rest"
+          whileHover="hover"
+          animate="rest"
+        >
+          <motion.div
+            className="hero-image-decoration"
+            variants={imageDecorationVariants}
+          ></motion.div>
           <div className="hero-animation">
             <BackgroundAnimation />
           </div>
@@ -103,7 +149,7 @@ const Hero = () => {
             alt="hero"
             className="hero-image"
           />
-        </div>
+        </motion.div>
       </div>
     </StyledHeroSection>
   );

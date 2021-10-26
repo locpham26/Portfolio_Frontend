@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import styled, { ThemeContext } from "styled-components";
+import React from "react";
+import styled from "styled-components";
 import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
 import WithView from "../hooks/withView";
 import SectionTitle from "../SectionTitle";
@@ -196,6 +196,7 @@ const Projects = () => {
             initial="hidden"
             animation="show"
             variants={projectVariants}
+            key={index}
           >
             <StyledProjectItem key={index} isOdd={(index + 1) % 2 !== 0}>
               <div className="item-inner">

@@ -30,9 +30,21 @@ const StyledHeader = styled(motion.header)`
     display: flex;
     align-items: center;
     justify-content: center;
-    outline: none;
     cursor: pointer;
     border-radius: var(--border-radius);
+    box-shadow: inset 0 0 20px rgba(27, 232, 224, 0);
+    outline: 1px solid;
+    outline-color: rgba(27, 232, 224, 0.5);
+    outline-offset: 0px;
+    text-shadow: none;
+    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+    &:hover {
+      box-shadow: inset 0 0 20px rgba(27, 232, 224, 0.5),
+        0 0 20px rgba(27, 232, 224, 0.2);
+      outline-color: rgba(27, 232, 224, 0);
+      outline-offset: 15px;
+      text-shadow: 1px 1px 2px #427388;
+    }
   }
 `;
 
