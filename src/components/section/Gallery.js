@@ -176,7 +176,7 @@ const Gallery = () => {
   return (
     <StyledGallerySection id="other">
       <SectionTitle
-        title="5. Other Works"
+        title="4. Other Works"
         subtitle="This is the logos and posters I designed"
       />
       <WithView initial="hidden" animation="show" variants={variants}>
