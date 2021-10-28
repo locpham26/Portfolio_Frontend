@@ -28,6 +28,7 @@ const StyledHeader = styled(motion.header)`
     background-color: transparent;
     font-size: 16px;
     display: flex;
+    text-decoration: none;
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -185,7 +186,14 @@ const Nav = ({ location }) => {
           </StyledLinkWrapper>
         ))}
       </StyledNavList>
-      <button className="resume-button">Resume</button>
+      <a
+        className="resume-button"
+        href="/resume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Resume
+      </a>
     </StyledHeader>
   );
 };

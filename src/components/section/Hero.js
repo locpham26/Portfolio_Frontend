@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
 import BackgroundAnimation from "../BackgroundAnimation";
-import { MailIcon, PhoneIcon } from "../icons";
+// import { MailIcon, PhoneIcon } from "../icons";
 import { motion } from "framer-motion";
 
 const StyledHeroSection = styled.section`
@@ -72,12 +72,14 @@ const StyledHeroSection = styled.section`
       }
       .resume-button {
         padding: 16px 24px;
+        width: fit-content;
         border: 1px solid ${({ theme }) => theme.mainTeal};
         color: ${({ theme }) => theme.mainTeal};
         background-color: transparent;
         font-size: 20px;
         display: flex;
         align-items: center;
+        text-decoration: none;
         justify-content: center;
         cursor: pointer;
         margin: 32px 0px;
@@ -128,7 +130,14 @@ const Hero = () => {
             software. I care deeply about building applications that are usable
             and pleasant for the most number of users possible.
           </p>
-          <button className="resume-button">View my resume</button>
+          <a
+            className="resume-button"
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View my resume
+          </a>
         </div>
 
         <motion.div

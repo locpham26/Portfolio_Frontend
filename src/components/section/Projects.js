@@ -237,7 +237,7 @@ const Projects = () => {
           </WithView>
         ))}
       </StyledProjectList>
-      <h3 className="other-title">Other Projects</h3>
+      {/* <h3 className="other-title">Other Projects</h3>
       <StyledOtherContainer>
         <ul className="projects-grid">
           <StyledProjectCard>
@@ -260,7 +260,7 @@ const Projects = () => {
             </div>
           </StyledProjectCard>
         </ul>
-      </StyledOtherContainer>
+      </StyledOtherContainer> */}
     </ProjectSection>
   );
 };
