@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     siteUrl: "https://www.yourdomain.tld",
@@ -40,7 +44,7 @@ module.exports = {
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: `https://murmuring-harbor-63131.herokuapp.com`,
+        apiURL: process.env.API_URL,
         collectionTypes: [`jobs`, `projects`],
         singleTypes: [`gallery`, `intro`],
       },
