@@ -135,16 +135,16 @@ const About = () => {
               </p>
               <p className="info-text">
                 My interest in software development started when I built an
-                online boardgame with a group of friends. It was a valuable
+                online board game with a group of friends. It was a valuable
                 experience that taught me a lot about HTML, CSS, and Vue.js.
-                Then, I dived deeply in learning web development, mobile
-                development, and UI/UX design so that I can deliver asthetic and
-                optimized applications.
+                Then, I dived deeply into learning web development, mobile
+                development, and UI/UX design so that I can deliver aesthetic
+                and optimized applications.
               </p>
               <p className="info-text">
                 I've had the opportunities to work at an outsourcing company, a
-                product cooperation, and a start-up. Currently, I'm looking for
-                any available positions in software development.
+                corporation, and a start-up. Currently, I'm looking for any
+                available positions in software development.
               </p>
             </WithView>
           </StyledAboutInfo>
