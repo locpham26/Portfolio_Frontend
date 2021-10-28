@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import WithView from "../hooks/withView";
 import SectionTitle from "../SectionTitle";
+import { graphql, useStaticQuery } from "gatsby";
 
 const ProjectSection = styled.section`
   width: 80%;
@@ -42,6 +43,8 @@ const StyledProjectImage = styled.div`
   .image-inner {
     border-radius: var(--border-radius);
     position: relative;
+    height: 100%;
+    display: block;
     &:hover {
       &::before {
         background-color: transparent;
@@ -76,7 +79,6 @@ const StyledProjectInfo = styled.div`
     border: 1px solid #dddddd;
     background-color: white;
     width: 100%;
-    height: 240px;
     padding: 24px;
     .decoration {
       z-index: -1;
@@ -93,14 +95,14 @@ const StyledProjectInfo = styled.div`
       color: ${({ theme }) => theme.mainPurple};
       font-size: 20px;
       font-weight: 500;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
       box-sizing: border-box;
     }
     .project-item-description {
       color: var(--primary-text);
       font-size: 16px;
       margin: 0px;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
       box-sizing: border-box;
     }
     .project-item-tool-list {
@@ -184,6 +186,9 @@ const projectVariants = {
 };
 
 const Projects = () => {
+  const {
+    allStrapiProjects: { nodes: projects },
+  } = useStaticQuery(query);
   return (
     <ProjectSection id="projects">
       <SectionTitle
@@ -191,34 +196,35 @@ const Projects = () => {
         subtitle="The projects I have been working on"
       />
       <StyledProjectList>
-        {[0, 1, 2].map((_, index) => (
+        {projects.map((project, index) => (
           <WithView
             initial="hidden"
             animation="show"
             variants={projectVariants}
-            key={index}
+            key={project.id}
           >
-            <StyledProjectItem key={index} isOdd={(index + 1) % 2 !== 0}>
+            <StyledProjectItem key={project.id} isOdd={(index + 1) % 2 !== 0}>
               <div className="item-inner">
                 <StyledProjectImage>
-                  <div className="image-inner">
-                    <StaticImage
+                  <a
+                    className="image-inner"
+                    href={project.link}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <GatsbyImage
                       className="project-item-image"
-                      src="../../images/background.jpg"
+                      image={getImage(project.image.localFile)}
                       alt="bg"
                     />
-                  </div>
+                  </a>
                 </StyledProjectImage>
                 <StyledProjectInfo isOdd={(index + 1) % 2 !== 0}>
                   <div className="info-inner">
                     <div className="decoration"></div>
-                    <div className="project-item-name">Werewolf Board Game</div>
+                    <div className="project-item-name">{project.name}</div>
                     <div className="project-item-description">
-                      A simple online board game that allowed users to play and
-                      chat simultaneously. A simple online board game that
-                      allowed users to play and chat simultaneously. A simple
-                      online board game that allowed users to play and chat
-                      simultaneously
+                      {project.description}
                     </div>
                     <ul className="project-item-tool-list">
                       <li>Vue</li>
@@ -258,5 +264,25 @@ const Projects = () => {
     </ProjectSection>
   );
 };
+
+export const query = graphql`
+  {
+    allStrapiProjects {
+      nodes {
+        name
+        link
+        description
+        id
+        image {
+          localFile {
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default Projects;

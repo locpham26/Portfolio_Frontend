@@ -13,12 +13,12 @@ const Logo = () => (
         data-name="Rectangle 96"
         d="M0,0H12a8,8,0,0,1,8,8V20a0,0,0,0,1,0,0H8a8,8,0,0,1-8-8V0A0,0,0,0,1,0,0Z"
         transform="translate(-1088 809)"
-        fill="#6510cc"
+        fill="#1BE8E0"
       />
       <text
         id="L"
         transform="translate(-1077 824)"
-        fill="#fff"
+        fill="#081927"
         fontSize="14"
         fontFamily="ComicSansMS, Comic Sans MS"
       >
