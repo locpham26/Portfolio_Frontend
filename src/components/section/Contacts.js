@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useContext, useEffect, useState } from "react";
+import styled, { ThemeContext } from "styled-components";
 import Lottie from "react-lottie-player";
 import { paperPlaneAnimation } from "../animation";
 import SectionTitle from "../SectionTitle";
@@ -12,6 +12,7 @@ const StyledContactSection = styled.section`
     width: 80%;
     margin: 0 auto;
     padding: 64px 0px;
+    max-width: 1600px;
   }
 `;
 
@@ -23,12 +24,11 @@ const StyledContactContainer = styled.div`
   align-items: center;
   padding: 40px;
   background-color: ${({ theme }) => theme.mainDark};
+  @media only screen and (${({ theme }) => theme.bp.laptopS}) {
+    flex-direction: column;
+  }
   .lottie {
     width: 400px;
-    @media screen and (${({ theme }) => theme.bp.desktopM}) {
-      width: 720px;
-      height: 400px;
-    }
   }
 `;
 
@@ -36,6 +36,9 @@ const StyledContactForm = styled.form`
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+  @media only screen and (${({ theme }) => theme.bp.laptopS}) {
+    width: 100%;
+  }
   .input-label {
     color: ${({ theme }) => theme.mainLightText};
     font-weight: 400;
@@ -74,6 +77,7 @@ const StyledContactForm = styled.form`
     outline-color: rgba(27, 232, 224, 0.5);
     outline-offset: 0px;
     text-shadow: none;
+    margin-bottom: 16px;
     transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
     &:hover {
       box-shadow: inset 0 0 20px rgba(27, 232, 224, 0.5),
@@ -83,6 +87,13 @@ const StyledContactForm = styled.form`
       text-shadow: 1px 1px 2px #427388;
     }
   }
+`;
+
+const StyledSubmitMessage = styled.div`
+  display: flex;
+  justify-content: center;
+  color: ${({ color }) => color};
+  visibility: ${({ show }) => (show ? "visible" : "hidden")};
 `;
 
 const variants = {
@@ -103,9 +114,32 @@ const Contacts = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [status, setStatus] = useState("success");
+  const themeContext = useContext(ThemeContext);
+  const feedBackContent = {
+    error: {
+      message: "Please fill in the form.",
+      color: themeContext.error,
+    },
+    success: {
+      message: "Message successfully sent. Thank you!",
+      color: themeContext.success,
+    },
+  };
+  useEffect(() => {
+    if (showFeedback) setTimeout(() => setShowFeedback(false), 4000);
+  }, [showFeedback]);
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (email.trim() === "" || name.trim() === "" || message.trim === "") {
+      setShowFeedback(true);
+      setStatus("error");
+      return;
+    }
     try {
+      setIsSubmitting(true);
       const response = await fetch(
         "https://getform.io/f/9196db3a-a677-4316-b3c5-97053175e6d2",
         {
@@ -120,7 +154,9 @@ const Contacts = () => {
           }),
         }
       );
-      if (response) console.log(response.status);
+      setIsSubmitting(false);
+      setShowFeedback(true);
+      if (response && response.status === 200) console.log(response.status);
     } catch (err) {
       console.log(err);
     }
@@ -130,7 +166,7 @@ const Contacts = () => {
       <div className="inner">
         <SectionTitle
           title="5. Contact Me"
-          subtitle="If you find my profile interesting, please leave me a message"
+          subtitle="If you find my profile interesting, please leave me a message."
           light
         />
         <WithView
@@ -198,9 +234,21 @@ const Contacts = () => {
                   />
                 </div>
               </div>
-              <button type="submit" className="submit-button">
+              <button
+                disabled={isSubmitting}
+                type="submit"
+                className="submit-button"
+              >
                 Send
               </button>
+
+              <StyledSubmitMessage
+                className="submit-message"
+                color={feedBackContent[status].color}
+                show={showFeedback}
+              >
+                {feedBackContent[status].message}
+              </StyledSubmitMessage>
             </StyledContactForm>
           </StyledContactContainer>
         </WithView>

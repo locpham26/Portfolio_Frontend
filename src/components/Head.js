@@ -9,6 +9,7 @@ const query = graphql`
       siteMetadata {
         defaultTitle: title
         defaultDescription: description
+        defaultImage: image
         siteUrl
         twitterUsername
       }
@@ -16,15 +17,21 @@ const query = graphql`
   }
 `;
 
-const Head = ({ title, description }) => {
+const Head = ({ title, description, image }) => {
   const { pathname } = useLocation();
   const { site } = useStaticQuery(query);
-  const { defaultTitle, defaultDescription, siteUrl, twitterUsername } =
-    site.siteMetadata;
+  const {
+    defaultTitle,
+    defaultDescription,
+    defaultImage,
+    siteUrl,
+    twitterUsername,
+  } = site.siteMetadata;
   const seo = {
     title: title || defaultTitle,
     description: description || defaultDescription,
     url: `${siteUrl}${pathname}`,
+    image: `${siteUrl}${image || defaultImage}`,
   };
   return (
     <Helmet title={seo.title}>
@@ -41,7 +48,7 @@ const Head = ({ title, description }) => {
       <meta name="twitter:creator" content={twitterUsername} />
       <meta name="twitter:title" content={seo.title} />
       <meta name="twitter:description" content={seo.description} />
-      {/* <meta name="twitter:image" content={seo.image} /> */}
+      <meta name="twitter:image" content={seo.image} />
     </Helmet>
   );
 };

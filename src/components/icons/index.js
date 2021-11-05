@@ -11,3 +11,7 @@ export { default as Logo } from "./logo";
 export { default as Decoration } from "./decoration";
 export { default as ChevronLeft } from "./chevronLeft";
 export { default as ChevronRight } from "./chevronRight";
+export { default as BackendIcon } from "./backend";
+export { default as MenuIcon } from "./menu";
+export { default as CloseIcon } from "./close";
+export { default as LinkIcon } from "./link";

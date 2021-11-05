@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { DesignIcon, MobileIcon, WebIcon } from "../icons";
-import { motion } from "framer-motion";
+import { DesignIcon, MobileIcon, WebIcon, BackendIcon } from "../icons";
+// import { motion } from "framer-motion";
 import WithView from "../hooks/withView";
 import SectionTitle from "../SectionTitle";
 import { graphql, useStaticQuery } from "gatsby";
@@ -13,15 +13,22 @@ const StyledAboutSection = styled.section`
   .inner {
     width: 80%;
     margin: 0 auto;
+    max-width: 1600px;
     .inner-info {
       display: flex;
       gap: 48px;
+      @media only screen and (${({ theme }) => theme.bp.laptopM}) {
+        flex-direction: column;
+      }
     }
   }
 `;
 
 const StyledAboutInfo = styled.div`
   flex: 0 0 400px;
+  @media only screen and (${({ theme }) => theme.bp.laptopM}) {
+    flex: 0 0 auto;
+  }
   .info-text {
     font-size: 16px;
     color: var(--secondary-text);
@@ -44,7 +51,11 @@ const StyledSkillCard = styled.div`
   border-radius: var(--border-radius);
   border: 1px solid #dddeee;
   background-color: white;
-  max-width: calc(50% - 48px);
+  width: calc(50% - 48px);
+  @media only screen and (${({ theme }) => theme.bp.tabletL}) {
+    width: 100%;
+  }
+
   &:hover {
     box-shadow: 4px 4px 10px rgb(0 0 0 / 16%);
   }
@@ -78,37 +89,26 @@ const StyledSkillCard = styled.div`
       font-size: 16px;
       text-align: center;
       color: var(--secondary-text);
-      margin-bottom: 16px;
+      margin-bottom: 24px;
     }
     .tool-title {
       color: ${({ theme }) => theme.mainPurple};
+      margin-bottom: 16px;
+    }
+    .tool-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      li {
+        color: ${({ theme }) => theme.mainPurple};
+      }
     }
   }
 `;
-
-const skillItems = [
-  {
-    key: "web",
-    title: "Web Development",
-    description:
-      "Developing fast and artistically pleasing web applications has been a passion for me.",
-    icon: <WebIcon />,
-  },
-  {
-    key: "mobile",
-    title: "Mobile Development",
-    description:
-      "Creating user-friendly and cross-platform mobile applications is my recent work.",
-    icon: <MobileIcon />,
-  },
-  {
-    key: "design",
-    title: "UI UX Design",
-    description:
-      "Driven by the desire to provide the best experience for users, I work meticulously on UI/UX design.",
-    icon: <DesignIcon />,
-  },
-];
 
 const textVariant = {
   hidden: {
@@ -126,9 +126,14 @@ const textVariant = {
 
 const About = () => {
   const {
-    allStrapiIntro: { nodes: intro },
+    allStrapiSkills: { nodes: skills },
   } = useStaticQuery(query);
-  const info = intro[0].info;
+  const iconList = [
+    <WebIcon />,
+    <MobileIcon />,
+    <DesignIcon />,
+    <BackendIcon />,
+  ];
   return (
     <StyledAboutSection id="about">
       <div className="inner">
@@ -161,14 +166,17 @@ const About = () => {
           <StyledSkillList>
             <WithView initial="hidden" variants={textVariant} animation="show">
               <div className="skill-box-inner">
-                {skillItems.map((item, index) => (
-                  <StyledSkillCard key={item.key}>
+                {skills.map((item, index) => (
+                  <StyledSkillCard key={item.strapiId}>
                     <div className="skill-card-inner">
-                      <div className="icon-wrapper">{item.icon}</div>
-                      <div className="title">{item.title}</div>
+                      <div className="icon-wrapper">{iconList[index]}</div>
+                      <div className="title">{item.name}</div>
                       <div className="description">{item.description}</div>
-                      <div className="tool-title">Tools I use</div>
-                      <ul></ul>
+                      <ul className="tool-list">
+                        {item.tool.map((t) => (
+                          <li key={t.id}>{t.name}</li>
+                        ))}
+                      </ul>
                     </div>
                   </StyledSkillCard>
                 ))}
@@ -183,9 +191,15 @@ const About = () => {
 
 export const query = graphql`
   {
-    allStrapiIntro {
+    allStrapiSkills {
       nodes {
-        info
+        strapiId
+        name
+        description
+        tool {
+          id
+          name
+        }
       }
     }
   }

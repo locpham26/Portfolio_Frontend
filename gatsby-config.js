@@ -4,11 +4,12 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
+    siteUrl: "https://locpham.gatsbyjs.io",
     title: "Loc Pham",
     description:
-      "Loc Pham is a software engineer who loves creating web and mobile applications.",
+      "I am a software engineer who builds user-friendly and functional software. I care deeply about building applications that are usable and pleasant for the most number of users possible.",
     twitterUsername: "@LocPham26",
+    image: "/snap.png",
   },
   plugins: [
     "gatsby-plugin-styled-components",
