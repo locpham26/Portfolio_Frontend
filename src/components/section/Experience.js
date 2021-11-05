@@ -31,6 +31,10 @@ const StyledJobWrapper = styled.div`
       color: ${({ theme }) => theme.mainTeal};
       font-weight: 500;
       font-size: 20px;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
     }
     .position {
       color: ${({ theme }) => theme.mainLightText};
@@ -95,13 +99,24 @@ const Experience = () => {
         <SectionTitle
           title="2. Experience"
           subtitle="A list of where I worked"
+          light={true}
         />
         <div className="jobs-container">
           {jobs.map((item, index) => (
-            <StyledJobWrapper key={index} isEven={(index + 1) % 2 === 0}>
+            <StyledJobWrapper
+              key={item.strapiId}
+              isEven={(index + 1) % 2 === 0}
+            >
               <div className="job-inner">
                 <span className="position">{item.position} </span>
-                <span className="organization-name">@{item.company}</span>
+                <a
+                  className="organization-name"
+                  href={item.company_link}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  @{item.company}
+                </a>
                 <div className="period">{item.duration}</div>
                 <StyledJobDescription>
                   {item.description.map((desc) => (
@@ -129,6 +144,7 @@ export const query = graphql`
           id
         }
         strapiId
+        company_link
       }
     }
   }

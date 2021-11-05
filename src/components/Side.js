@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FacebookIcon, GithubIcon, InstaIcon, LinkedInIcon } from "./icons";
+import { graphql, useStaticQuery } from "gatsby";
 
 const StyledSideBar = styled.div`
   position: fixed;
@@ -41,26 +42,30 @@ const StyledSocialList = styled.ul`
   }
 `;
 
-const socialItems = [
-  {
-    key: "facebook",
-    to: "https://www.facebook.com/phamthe.loc.12/",
-    icon: <FacebookIcon />,
-  },
-  {
-    key: "linkedin",
-    to: "https://www.linkedin.com/in/locpham26/",
-    icon: <LinkedInIcon />,
-  },
-  {
-    key: "insta",
-    to: "https://www.instagram.com/phamtheloc/",
-    icon: <InstaIcon />,
-  },
-  { key: "github", to: "https://github.com/locpham26", icon: <GithubIcon /> },
-];
-
 const Side = () => {
+  const {
+    allStrapiSocialMedia: { nodes: socialLinks },
+  } = useStaticQuery(query);
+  const { facebook, linkedin, instagram, github } = socialLinks[0];
+
+  const socialItems = [
+    {
+      key: "facebook",
+      to: facebook,
+      icon: <FacebookIcon />,
+    },
+    {
+      key: "linkedin",
+      to: linkedin,
+      icon: <LinkedInIcon />,
+    },
+    {
+      key: "insta",
+      to: instagram,
+      icon: <InstaIcon />,
+    },
+    { key: "github", to: github, icon: <GithubIcon /> },
+  ];
   return (
     <StyledSideBar>
       <StyledSocialList>
@@ -75,5 +80,18 @@ const Side = () => {
     </StyledSideBar>
   );
 };
+
+export const query = graphql`
+  {
+    allStrapiSocialMedia {
+      nodes {
+        instagram
+        linkedin
+        github
+        facebook
+      }
+    }
+  }
+`;
 
 export default Side;

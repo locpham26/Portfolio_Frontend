@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { graphql, useStaticQuery } from "gatsby";
 
 const StyledFooter = styled.footer`
   height: var(--nav-height);
@@ -12,15 +13,37 @@ const StyledFooter = styled.footer`
   .footer-text {
     color: var(--secondary-text);
     font-size: 14px;
+    text-decoration: none;
   }
 `;
 
 const Footer = () => {
+  const {
+    allStrapiRepo: { nodes: repo },
+  } = useStaticQuery(query);
+  const repoLink = repo[0].link;
   return (
     <StyledFooter>
-      <p className="footer-text">Designed and built by Loc Pham</p>
+      <a
+        className="footer-text"
+        href={repoLink}
+        target="_blank"
+        rel="noreferrer"
+      >
+        Designed and built by Loc Pham
+      </a>
     </StyledFooter>
   );
 };
+
+export const query = graphql`
+  {
+    allStrapiRepo {
+      nodes {
+        link
+      }
+    }
+  }
+`;
 
 export default Footer;

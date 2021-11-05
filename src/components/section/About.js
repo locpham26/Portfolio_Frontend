@@ -4,6 +4,7 @@ import { DesignIcon, MobileIcon, WebIcon } from "../icons";
 import { motion } from "framer-motion";
 import WithView from "../hooks/withView";
 import SectionTitle from "../SectionTitle";
+import { graphql, useStaticQuery } from "gatsby";
 
 const StyledAboutSection = styled.section`
   width: 100%;
@@ -23,7 +24,7 @@ const StyledAboutInfo = styled.div`
   flex: 0 0 400px;
   .info-text {
     font-size: 16px;
-    color: ${({ theme }) => theme.mainDark};
+    color: var(--secondary-text);
     margin-bottom: 24px;
   }
 `;
@@ -65,9 +66,10 @@ const StyledSkillCard = styled.div`
     }
     .title {
       font-weight: 500;
-      font-size: 24px;
+      font-size: 20px;
       box-sizing: border-box;
       color: var(--primary-text);
+      font-family: var(--font-sans-serif);
       margin-bottom: 16px;
       text-align: center;
     }
@@ -76,6 +78,10 @@ const StyledSkillCard = styled.div`
       font-size: 16px;
       text-align: center;
       color: var(--secondary-text);
+      margin-bottom: 16px;
+    }
+    .tool-title {
+      color: ${({ theme }) => theme.mainPurple};
     }
   }
 `;
@@ -119,6 +125,10 @@ const textVariant = {
 };
 
 const About = () => {
+  const {
+    allStrapiIntro: { nodes: intro },
+  } = useStaticQuery(query);
+  const info = intro[0].info;
   return (
     <StyledAboutSection id="about">
       <div className="inner">
@@ -149,24 +159,36 @@ const About = () => {
             </WithView>
           </StyledAboutInfo>
           <StyledSkillList>
-            {/* <WithView initial="hidden" variants={textVariant} animation="show"> */}
-            <div className="skill-box-inner">
-              {skillItems.map((item, index) => (
-                <StyledSkillCard key={item.key}>
-                  <div className="skill-card-inner">
-                    <div className="icon-wrapper">{item.icon}</div>
-                    <div className="title">{item.title}</div>
-                    <div className="description">{item.description}</div>
-                  </div>
-                </StyledSkillCard>
-              ))}
-            </div>
-            {/* </WithView> */}
+            <WithView initial="hidden" variants={textVariant} animation="show">
+              <div className="skill-box-inner">
+                {skillItems.map((item, index) => (
+                  <StyledSkillCard key={item.key}>
+                    <div className="skill-card-inner">
+                      <div className="icon-wrapper">{item.icon}</div>
+                      <div className="title">{item.title}</div>
+                      <div className="description">{item.description}</div>
+                      <div className="tool-title">Tools I use</div>
+                      <ul></ul>
+                    </div>
+                  </StyledSkillCard>
+                ))}
+              </div>
+            </WithView>
           </StyledSkillList>
         </div>
       </div>
     </StyledAboutSection>
   );
 };
+
+export const query = graphql`
+  {
+    allStrapiIntro {
+      nodes {
+        info
+      }
+    }
+  }
+`;
 
 export default About;

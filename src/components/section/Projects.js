@@ -92,14 +92,15 @@ const StyledProjectInfo = styled.div`
       background-color: ${({ theme }) => theme.mainPurple};
     }
     .project-item-name {
-      color: ${({ theme }) => theme.mainPurple};
+      color: ${({ theme }) => theme.mainDarkText};
+      font-family: var(--font-sans-serif);
       font-size: 20px;
       font-weight: 500;
       margin-bottom: 8px;
       box-sizing: border-box;
     }
     .project-item-description {
-      color: var(--primary-text);
+      color: ${({ theme }) => theme.secondaryDarkText};
       font-size: 16px;
       margin: 0px;
       margin-bottom: 8px;
@@ -113,7 +114,7 @@ const StyledProjectInfo = styled.div`
       margin: 0px;
       li {
         margin-right: 16px;
-        color: var(--secondary-text);
+        color: ${({ theme }) => theme.mainPurple};
         font-size: 16px;
       }
     }

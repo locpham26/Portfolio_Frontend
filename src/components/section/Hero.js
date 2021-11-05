@@ -54,7 +54,7 @@ const StyledHeroSection = styled.section`
       max-width: 60%;
       .hero-info-greet {
         color: ${({ theme }) => theme.mainTeal};
-        font-family: var(--font-sans-serif);
+        font-family: var(--font-sans);
         font-weight: 500;
         font-size: 18px;
       }

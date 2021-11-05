@@ -21,8 +21,11 @@ const theme = {
   mainPink: "#F2B8EB",
   mainTeal: "#1BE8E0",
   mainDark: "#081927",
+  mainNavy: "#152238",
   mainLightText: "#F6F4FF",
   secondLightText: "#C7D0D9",
+  mainDarkText: "#1c1a1a",
+  secondaryDarkText: "#60626e",
 };
 
 export default theme;

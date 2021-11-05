@@ -6,13 +6,18 @@ import SectionTitle from "../SectionTitle";
 import WithView from "../hooks/withView";
 
 const StyledContactSection = styled.section`
-  width: 80%;
-  margin: 0 auto;
-  margin-bottom: 96px;
+  background-color: ${({ theme }) => theme.mainDark};
+  /* margin-bottom: 128px; */
+  .inner {
+    width: 80%;
+    margin: 0 auto;
+    padding: 64px 0px;
+  }
 `;
 
 const StyledContactContainer = styled.div`
   border-radius: var(--border-radius);
+  border: 1px solid ${({ theme }) => theme.mainTeal};
   width: 100%;
   display: flex;
   align-items: center;
@@ -122,74 +127,84 @@ const Contacts = () => {
   };
   return (
     <StyledContactSection id="contacts">
-      <SectionTitle
-        title="5. Contact Me"
-        subtitle="If you find my profile interesting, please leave me a message"
-      />
-      <WithView initial="hidden" animation="show" variants={variants} fullWidth>
-        <StyledContactContainer>
-          <Lottie
-            className="lottie"
-            play
-            loop
-            animationData={paperPlaneAnimation}
-          />
-          <StyledContactForm onSubmit={onSubmit}>
-            <div style={{ display: "flex", gap: "16px", marginBottom: "32px" }}>
+      <div className="inner">
+        <SectionTitle
+          title="5. Contact Me"
+          subtitle="If you find my profile interesting, please leave me a message"
+          light
+        />
+        <WithView
+          initial="hidden"
+          animation="show"
+          variants={variants}
+          fullWidth
+        >
+          <StyledContactContainer>
+            <Lottie
+              className="lottie"
+              play
+              loop
+              animationData={paperPlaneAnimation}
+            />
+            <StyledContactForm onSubmit={onSubmit}>
               <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  flex: "1 1 50%",
-                }}
+                style={{ display: "flex", gap: "16px", marginBottom: "32px" }}
               >
-                <label className="input-label" htmlFor="email">
-                  Email
-                </label>
-                <input
-                  className="input-field"
-                  id="email"
-                  type="email"
-                  name="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <label className="input-label" htmlFor="name">
-                  Name
-                </label>
-                <input
-                  className="input-field"
-                  id="name"
-                  type="text"
-                  name="name"
-                  onChange={(e) => setName(e.target.value)}
-                />
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    flex: "1 1 50%",
+                  }}
+                >
+                  <label className="input-label" htmlFor="email">
+                    Email
+                  </label>
+                  <input
+                    className="input-field"
+                    id="email"
+                    type="email"
+                    name="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <label className="input-label" htmlFor="name">
+                    Name
+                  </label>
+                  <input
+                    className="input-field"
+                    id="name"
+                    type="text"
+                    name="name"
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    flex: "1 1 50%",
+                  }}
+                >
+                  <label className="input-label" htmlFor="message">
+                    Message
+                  </label>
+                  <textarea
+                    className="input-field input-area"
+                    id="message"
+                    type="text"
+                    name="message"
+                    rows="4"
+                    onChange={(e) => setMessage(e.target.value)}
+                  />
+                </div>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  flex: "1 1 50%",
-                }}
-              >
-                <label className="input-label" htmlFor="message">
-                  Message
-                </label>
-                <textarea
-                  className="input-field input-area"
-                  id="message"
-                  type="text"
-                  name="message"
-                  rows="4"
-                  onChange={(e) => setMessage(e.target.value)}
-                />
-              </div>
-            </div>
-            <button type="submit" className="submit-button">
-              Send
-            </button>
-          </StyledContactForm>
-        </StyledContactContainer>
-      </WithView>
+              <button type="submit" className="submit-button">
+                Send
+              </button>
+            </StyledContactForm>
+          </StyledContactContainer>
+        </WithView>
+      </div>
     </StyledContactSection>
   );
 };
