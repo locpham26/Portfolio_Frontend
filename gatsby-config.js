@@ -57,5 +57,12 @@ module.exports = {
         duration: 400,
       },
     },
+    {
+      resolve: "gatsby-plugin-robots-txt",
+      options: {
+        host: "https://locpham.gatsbyjs.io",
+        policy: [{ userAgent: "*", allow: "/" }],
+      },
+    },
   ],
 };
