@@ -4,11 +4,13 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import WithView from "../hooks/withView";
 import SectionTitle from "../SectionTitle";
 import { graphql, useStaticQuery } from "gatsby";
+import { GithubIcon, LinkIcon } from "../icons";
 
 const ProjectSection = styled.section`
   width: 80%;
   margin: 0 auto;
   margin-bottom: 192px;
+  max-width: 1600px;
   .other-title {
     color: ${({ theme }) => theme.mainTeal};
     font-size: 24px;
@@ -28,7 +30,7 @@ const StyledProjectList = styled.ul`
 `;
 
 const StyledProjectItem = styled.li`
-  margin-bottom: 96px;
+  margin-bottom: 120px;
   .item-inner {
     display: flex;
     flex-direction: ${({ isOdd }) => (isOdd ? "row" : "row-reverse")};
@@ -112,10 +114,24 @@ const StyledProjectInfo = styled.div`
       list-style: none;
       padding: 0px;
       margin: 0px;
+      margin-bottom: 16px;
       li {
         margin-right: 16px;
         color: ${({ theme }) => theme.mainPurple};
         font-size: 16px;
+      }
+    }
+    .project-item-icon-wrapper {
+      margin-right: 16px;
+      &:hover {
+        svg {
+          fill: ${({ theme }) => theme.mainPurple};
+        }
+      }
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: var(--primary-text);
       }
     }
   }
@@ -202,7 +218,7 @@ const Projects = () => {
             initial="hidden"
             animation="show"
             variants={projectVariants}
-            key={project.id}
+            key={project.strapiId}
           >
             <StyledProjectItem key={project.id} isOdd={(index + 1) % 2 !== 0}>
               <div className="item-inner">
@@ -228,9 +244,28 @@ const Projects = () => {
                       {project.description}
                     </div>
                     <ul className="project-item-tool-list">
-                      <li>Vue</li>
-                      <li>Django</li>
+                      {project.tool.map((t) => (
+                        <li key={t.id}>{t.name}</li>
+                      ))}
                     </ul>
+                    <div>
+                      <a
+                        className="project-item-icon-wrapper"
+                        href={project.link}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <LinkIcon />
+                      </a>
+                      <a
+                        className="project-item-icon-wrapper"
+                        href={project.repo}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <GithubIcon />
+                      </a>
+                    </div>
                   </div>
                 </StyledProjectInfo>
               </div>
@@ -270,10 +305,15 @@ export const query = graphql`
   {
     allStrapiProjects {
       nodes {
+        tool {
+          id
+          name
+        }
+        repo
+        strapiId
         name
         link
         description
-        id
         image {
           localFile {
             childImageSharp {

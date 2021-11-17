@@ -2,16 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { StaticImage } from "gatsby-plugin-image";
 import BackgroundAnimation from "../BackgroundAnimation";
-// import { MailIcon, PhoneIcon } from "../icons";
+import { MailIcon } from "../icons";
 import { motion } from "framer-motion";
 
 const StyledHeroSection = styled.section`
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   margin-bottom: 96px;
   background-color: ${({ theme }) => theme.mainDark};
   .inner {
-    height: 100%;
+    min-height: 100vh;
     width: 80%;
     max-width: 1800px;
     margin: auto;
@@ -19,6 +19,14 @@ const StyledHeroSection = styled.section`
     align-items: center;
     justify-content: space-around;
     position: relative;
+    @media only screen and (${({ theme }) => theme.bp.laptopS}) {
+      flex-direction: column-reverse;
+      justify-content: center;
+      width: 90%;
+      .hero-image-wrapper {
+        margin-bottom: 48px;
+      }
+    }
     .hero-image-wrapper {
       /* flex: 0 0 280px; */
       width: 280px;
@@ -52,6 +60,13 @@ const StyledHeroSection = styled.section`
 
     .hero-info-wrapper {
       max-width: 60%;
+      @media only screen and (${({ theme }) => theme.bp.laptopS}) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
       .hero-info-greet {
         color: ${({ theme }) => theme.mainTeal};
         font-family: var(--font-sans);
@@ -98,6 +113,29 @@ const StyledHeroSection = styled.section`
           text-shadow: 1px 1px 2px #427388;
         }
       }
+      .email-wrapper {
+        display: flex;
+        align-items: center;
+        width: fit-content;
+        &:hover {
+          a {
+            color: ${({ theme }) => theme.mainTeal};
+          }
+          svg {
+            fill: ${({ theme }) => theme.mainTeal};
+          }
+        }
+        a {
+          color: ${({ theme }) => theme.secondLightText};
+          text-decoration: none;
+          font-size: 20px;
+          font-weight: 500;
+        }
+        svg {
+          fill: ${({ theme }) => theme.secondLightText};
+          margin-right: 16px;
+        }
+      }
     }
   }
 `;
@@ -115,6 +153,8 @@ const imageDecorationVariants = {
     },
   },
 };
+
+const email = "locpham2602@gmail.com";
 
 const Hero = () => {
   return (
@@ -138,6 +178,10 @@ const Hero = () => {
           >
             View my resume
           </a>
+          <div className="email-wrapper">
+            <MailIcon />
+            <a href={`mailto:${email}`}>{email}</a>
+          </div>
         </div>
 
         <motion.div

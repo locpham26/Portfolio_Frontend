@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { motion, useViewportScroll } from "framer-motion";
 import { AnchorLink } from "gatsby-plugin-anchor-links";
 import { Logo } from "./icons";
+import { MenuIcon } from "./icons";
 
 const StyledHeader = styled(motion.header)`
   ${({ theme }) => theme.mixins.flexBetween};
@@ -22,6 +23,9 @@ const StyledHeader = styled(motion.header)`
     }
   }
   .resume-button {
+    @media only screen and (${({ theme }) => theme.bp.tabletL}) {
+      display: none;
+    }
     padding: 8px 16px;
     border: 1px solid ${({ theme }) => theme.mainTeal};
     color: ${({ theme }) => theme.mainTeal};
@@ -47,11 +51,24 @@ const StyledHeader = styled(motion.header)`
       text-shadow: 1px 1px 2px #427388;
     }
   }
+  .menu-icon {
+    display: none;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    @media only screen and (${({ theme }) => theme.bp.tabletL}) {
+      display: block;
+    }
+  }
 `;
 
 const StyledNavList = styled(motion.nav)`
   display: flex;
   height: 100%;
+  @media only screen and (${({ theme }) => theme.bp.tabletL}) {
+    display: none;
+  }
 `;
 
 const StyledLinkWrapper = styled(motion.div)`
@@ -137,7 +154,7 @@ const navItems = [
   { key: "contacts", to: "/#contacts", label: "Contacts" },
 ];
 
-const Nav = ({ location }) => {
+const Nav = ({ location, openMenu }) => {
   const [hidden, setHidden] = React.useState(false);
   const [overHero, setOverHero] = React.useState(false);
   const { scrollY } = useViewportScroll();
@@ -194,6 +211,9 @@ const Nav = ({ location }) => {
       >
         Resume
       </a>
+      <button className="menu-icon" onClick={openMenu}>
+        <MenuIcon />
+      </button>
     </StyledHeader>
   );
 };

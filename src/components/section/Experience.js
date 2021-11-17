@@ -10,18 +10,27 @@ const StyledExperienceSection = styled.section`
   .inner {
     width: 80%;
     margin: 0 auto;
+    max-width: 1600px;
     padding: 64px 0px 128px 0px;
     .jobs-container {
       display: flex;
       gap: 48px;
+      justify-content: space-between;
+      @media only screen and (${({ theme }) => theme.bp.laptopS}) {
+        flex-direction: column;
+      }
     }
   }
 `;
 
 const StyledJobWrapper = styled.div`
-  width: 100%;
+  width: calc(50% - 24px);
   position: relative;
   top: ${({ isEven }) => isEven && "48px"};
+  @media only screen and (${({ theme }) => theme.bp.laptopS}) {
+    width: 100%;
+    top: unset;
+  }
   .job-inner {
     border-radius: var(--border-radius);
     border: 1px solid ${({ theme }) => theme.mainTeal};
@@ -83,7 +92,7 @@ const textVariant = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 1.6,
+      duration: 1.2,
     },
   },
 };
@@ -98,35 +107,37 @@ const Experience = () => {
       <div className="inner">
         <SectionTitle
           title="2. Experience"
-          subtitle="A list of where I worked"
+          subtitle="Where I worked"
           light={true}
         />
-        <div className="jobs-container">
-          {jobs.map((item, index) => (
-            <StyledJobWrapper
-              key={item.strapiId}
-              isEven={(index + 1) % 2 === 0}
-            >
-              <div className="job-inner">
-                <span className="position">{item.position} </span>
-                <a
-                  className="organization-name"
-                  href={item.company_link}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  @{item.company}
-                </a>
-                <div className="period">{item.duration}</div>
-                <StyledJobDescription>
-                  {item.description.map((desc) => (
-                    <li key={desc.id}>{desc.detail}</li>
-                  ))}
-                </StyledJobDescription>
-              </div>
-            </StyledJobWrapper>
-          ))}
-        </div>
+        <WithView initial="hidden" variants={textVariant} animation="show">
+          <div className="jobs-container">
+            {jobs.map((item, index) => (
+              <StyledJobWrapper
+                key={item.strapiId}
+                isEven={(index + 1) % 2 === 0}
+              >
+                <div className="job-inner">
+                  <span className="position">{item.position} </span>
+                  <a
+                    className="organization-name"
+                    href={item.company_link}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    @{item.company}
+                  </a>
+                  <div className="period">{item.duration}</div>
+                  <StyledJobDescription>
+                    {item.description.map((desc) => (
+                      <li key={desc.id}>{desc.detail}</li>
+                    ))}
+                  </StyledJobDescription>
+                </div>
+              </StyledJobWrapper>
+            ))}
+          </div>
+        </WithView>
       </div>
     </StyledExperienceSection>
   );

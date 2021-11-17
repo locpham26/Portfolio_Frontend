@@ -1,6 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { FacebookIcon, GithubIcon, InstaIcon, LinkedInIcon } from "./icons";
+import {
+  FacebookIcon,
+  GithubIcon,
+  InstaIcon,
+  LinkedInIcon,
+  MailIcon,
+} from "./icons";
 import { graphql, useStaticQuery } from "gatsby";
 
 const StyledSideBar = styled.div`
@@ -10,6 +16,12 @@ const StyledSideBar = styled.div`
   z-index: 10;
   left: auto;
   width: 40px;
+  @media only screen and (${({ theme }) => theme.bp.laptopS}) {
+    right: 20px;
+  }
+  @media only screen and (${({ theme }) => theme.bp.tabletL}) {
+    right: 8px;
+  }
 `;
 
 const StyledSocialList = styled.ul`
@@ -42,6 +54,8 @@ const StyledSocialList = styled.ul`
   }
 `;
 
+const email = "locpham2602@gmail.com";
+
 const Side = () => {
   const {
     allStrapiSocialMedia: { nodes: socialLinks },
@@ -59,16 +73,21 @@ const Side = () => {
       to: linkedin,
       icon: <LinkedInIcon />,
     },
+    { key: "github", to: github, icon: <GithubIcon /> },
     {
       key: "insta",
       to: instagram,
       icon: <InstaIcon />,
     },
-    { key: "github", to: github, icon: <GithubIcon /> },
   ];
   return (
     <StyledSideBar>
       <StyledSocialList>
+        <li>
+          <a href={`mailto:${email}`}>
+            <MailIcon />
+          </a>
+        </li>
         {socialItems.map((item) => (
           <li key={item.key}>
             <a href={item.to} target="_blank" rel="noreferrer">

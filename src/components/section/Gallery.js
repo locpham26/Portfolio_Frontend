@@ -12,12 +12,15 @@ const StyledGallerySection = styled.section`
   margin: 0 auto;
   box-sizing: border-box;
   margin-bottom: 96px;
+  max-width: 1600px;
 `;
 
 const StyledCarousel = styled.div`
   display: flex;
   justify-content: space-around;
   gap: 64px;
+  /* max-width: 800px;
+  max-height: 800px; */
   align-items: center;
   .icon-wrapper {
     width: 40px;
@@ -34,7 +37,7 @@ const StyledCarousel = styled.div`
       }
     }
     svg {
-      width: 100%;
+      width: 24px;
       fill: #1a1c1c;
     }
   }
@@ -42,9 +45,9 @@ const StyledCarousel = styled.div`
 
 const StyledCarouselItem = styled.div`
   position: relative;
-  width: 800px;
-  height: 800px;
   display: ${({ active }) => (active ? "block" : "none")};
+  max-width: 800px;
+  max-height: 800px;
   .carousel-image {
     border-radius: var(--border-radius);
   }
@@ -103,43 +106,6 @@ export const query = graphql`
   }
 `;
 
-const parentVariants = {
-  hidden: {
-    delayChildren: 0.4,
-  },
-  show: {
-    delayChildren: 0.4,
-  },
-};
-
-const arrowLeftVariants = {
-  hidden: {
-    opacity: 0,
-    x: 24,
-  },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.8,
-    },
-  },
-};
-
-const arrowRightVariants = {
-  hidden: {
-    opacity: 0,
-    x: -24,
-  },
-  show: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.8,
-    },
-  },
-};
-
 const variants = {
   hidden: {
     opacity: 0,
@@ -177,17 +143,11 @@ const Gallery = () => {
     <StyledGallerySection id="other">
       <SectionTitle
         title="4. Other Works"
-        subtitle="This is the logos and posters I designed"
+        subtitle="The logos and posters I designed"
       />
       <WithView initial="hidden" animation="show" variants={variants}>
         <StyledCarousel>
-          <motion.button
-            // initial="hidden"
-            // animate="show"
-            // variants={arrowLeftVariants}
-            className="icon-wrapper"
-            onClick={getPrev}
-          >
+          <motion.button className="icon-wrapper" onClick={getPrev}>
             <ChevronLeft />
           </motion.button>
           {gallery[0].media_list.map((item, index) => (
@@ -200,13 +160,7 @@ const Gallery = () => {
               />
             </StyledCarouselItem>
           ))}
-          <motion.button
-            // initial="hidden"
-            // animate="show"
-            // variants={arrowRightVariants}
-            className="icon-wrapper"
-            onClick={getNext}
-          >
+          <motion.button className="icon-wrapper" onClick={getNext}>
             <ChevronRight />
           </motion.button>
         </StyledCarousel>

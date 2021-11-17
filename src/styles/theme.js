@@ -2,16 +2,16 @@ import mixins from "./mixins";
 
 const theme = {
   bp: {
-    mobileS: `min-width: 320px`,
-    mobileM: `min-width: 375px`,
-    mobileL: `min-width: 425px`,
-    tabletS: `min-width: 600px`,
-    tabletL: `min-width: 768px`,
-    laptopS: `min-width: 1024px`,
-    laptopM: `min-width: 1366px`,
-    laptopL: `min-width: 1440px`,
-    desktopM: `min-width: 1680px`,
-    desktopL: `min-width: 1920px`,
+    mobileS: `max-width: 320px`,
+    mobileM: `max-width: 375px`,
+    mobileL: `max-width: 425px`,
+    tabletS: `max-width: 600px`,
+    tabletL: `max-width: 768px`,
+    laptopS: `max-width: 1024px`,
+    laptopM: `max-width: 1366px`,
+    laptopL: `max-width: 1440px`,
+    desktopM: `max-width: 1680px`,
+    desktopL: `max-width: 1920px`,
   },
   mixins,
   mainPurple: "#1D48F5",
@@ -26,6 +26,8 @@ const theme = {
   secondLightText: "#C7D0D9",
   mainDarkText: "#1c1a1a",
   secondaryDarkText: "#60626e",
+  error: "#ff9494",
+  success: "#1BE8E0",
 };
 
 export default theme;
